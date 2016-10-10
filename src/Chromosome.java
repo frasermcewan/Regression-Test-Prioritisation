@@ -66,6 +66,12 @@ public class Chromosome implements Comparable<Chromosome> {
 		ArrayList<String> tempList = new ArrayList<>();
 		ArrayList<Chromosome> returnList = new ArrayList<>();
 
+		for (int y = 0; y < parent1.size(); y++) {
+			child1.add(y, null);
+			child2.add(y, null);
+		}
+		
+		
 		for (int k = 0; k <= pivotPoint; k++) {
 			child1.set(k, parent1.get(k));
 			child2.set(k, parent2.get(k));
@@ -78,7 +84,7 @@ public class Chromosome implements Comparable<Chromosome> {
 
 		}
 
-		for (int j = pivotPoint; j < child1.size(); j++) {
+		for (int j = pivotPoint; j <= child1.size(); j++) {
 			child1.set(j, tempList.get(counter));
 			counter++;
 		}
@@ -94,7 +100,7 @@ public class Chromosome implements Comparable<Chromosome> {
 
 		}
 
-		for (int j = pivotPoint; j < child1.size(); j++) {
+		for (int j = pivotPoint; j <= child1.size(); j++) {
 			child2.set(j, tempList.get(counter));
 			counter++;
 		}
