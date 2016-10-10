@@ -3,10 +3,10 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Chromosome implements Comparable<Chromosome> {
-	private ArrayList<String> testValues;
-	private Double fitness;
-	private Integer numberOfFaults;
-	private HashMap<String, ArrayList<Integer>> mapPop = new HashMap<>();
+	ArrayList<String> testValues;
+	Double fitness;
+	Integer numberOfFaults;
+	HashMap<String, ArrayList<Integer>> mapPop = new HashMap<>();
 	Random random = new Random();
 
 	public Chromosome(ArrayList<String> cases, Double fitnessVal, int numFaults,
@@ -48,7 +48,7 @@ public class Chromosome implements Comparable<Chromosome> {
 
 	}
 
-	public Chromosome[] crossover(Chromosome partner2) {
+	public ArrayList<Chromosome> crossover(Chromosome partner2) {
 		ArrayList<String> parent1 = getCases();
 		ArrayList<String> parent2 = partner2.getCases();
 		int pivotPoint = random.nextInt(parent1.size());
@@ -56,6 +56,7 @@ public class Chromosome implements Comparable<Chromosome> {
 		ArrayList<String> child1 = new ArrayList<>();
 		ArrayList<String> child2 = new ArrayList<>();
 		ArrayList<String> tempList = new ArrayList<>();
+		ArrayList<Chromosome> returnList = new ArrayList<>();
 
 		for (int k = 0; k <= pivotPoint; k++) {
 			child1.set(k, parent1.get(k));
@@ -93,8 +94,10 @@ public class Chromosome implements Comparable<Chromosome> {
 		tempList.clear();
 		counter = 0;
 
-		return new Chromosome[] { new Chromosome((child1), 0.0, numberOfFaults, mapPop),
-				new Chromosome((child2), 0.0, numberOfFaults, mapPop) };
+		returnList.add(new Chromosome((child1), 0.0, numberOfFaults, mapPop));
+		returnList.add(new Chromosome((child2), 0.0, numberOfFaults, mapPop));
+		
+		return returnList;
 	}
 
 	public Double getFitness() {

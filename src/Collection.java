@@ -1,10 +1,11 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 
 public class Collection {
 	int tournamentSize = 5;
-	int collectionSize = 1000;
+	int collectionSize = 20;
 	double mutationRatio = 0.02;
 	boolean increaseMutation = false;
 	boolean increaseMutation2 = false;
@@ -23,14 +24,14 @@ public class Collection {
 	}
 
 	public void generatePopulation() {
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < collectionSize; i++) {
 			chromePop.add(generateChromosome());
 		}
 
 		for (int j = 0; j < chromePop.size(); j++) {
 			System.out.println(chromePop.get(j).getFitness());
 		}
-		System.out.println(chromePop.size());
+		
 	}
 
 	public Chromosome generateChromosome() {
@@ -52,91 +53,83 @@ public class Collection {
 
 	}
 
-	// public void naturalSelection() {
-	// GeneticAlg[] temporaryList = new GeneticAlg[arrayCollection.length];
-	// int elitismPoint = (int) Math.round(arrayCollection.length *
-	// elitismRatio);
-	// for (int i = 0; i <= elitismPoint; i++) {
-	// temporaryList[i] = arrayCollection[i];
-	//
-	// }
-	//
-	// while (elitismPoint < temporaryList.length) {
-	//
-	// if (getFittest().fitness <= 5 && increaseMutation == false) {
-	// mutationRatio = mutationRatio * 10;
-	// increaseMutation = true;
-	// }
-	//
-	// if (getFittest().fitness <=1 && increaseMutation2 == false) {
-	// mutationRatio = mutationRatio * 25;
-	// increaseMutation2 = true;
-	// }
-	//
-	// if (random.nextDouble() <= selectionRatio) {
-	// GeneticAlg[] parentVersions = new GeneticAlg[2];
-	// parentVersions[0] = tournament();
-	// parentVersions[1] = tournament();
-	// GeneticAlg[] childrenVersions =
-	// parentVersions[0].crossover(parentVersions[1]);
-	//
-	// if (random.nextDouble() <= mutationRatio) {
-	//
-	// temporaryList[elitismPoint++] = childrenVersions[0].mutation();
-	// } else {
-	// temporaryList[elitismPoint++] = childrenVersions[0];
-	// }
-	//
-	// if (elitismPoint < temporaryList.length) {
-	// if (random.nextDouble() <= mutationRatio) {
-	// temporaryList[elitismPoint] = childrenVersions[1].mutation();
-	// } else {
-	// temporaryList[elitismPoint] = childrenVersions[1];
-	// }
-	// }
-	//
-	// }
-	//
-	// else {
-	// if (random.nextDouble() <= mutationRatio) {
-	// temporaryList[elitismPoint] = arrayCollection[elitismPoint].mutation();
-	// } else {
-	// temporaryList[elitismPoint] = arrayCollection[elitismPoint];
-	// }
-	// }
-	//
-	// ++elitismPoint;
-	// }
-	// Arrays.sort(temporaryList);
-	// arrayCollection = temporaryList;
-	//
-	// }
-	//
-	// public GeneticAlg getFittest() {
-	// return arrayCollection[0];
-	// }
-	//
-	// public int Fitness() {
-	// return arrayCollection[0].fitness;
-	//
-	// }
-	//
-	//
-	//
-	//
-	// public GeneticAlg tournament() {
-	// GeneticAlg parent;
-	// parent = arrayCollection[random.nextInt(arrayCollection.length)];
-	// for (int j = 0; j < tournamentSize; j++) {
-	// int point = random.nextInt(arrayCollection.length);
-	// if (arrayCollection[point].compareTo(parent) < 0) {
-	// parent = arrayCollection[point];
-	// }
-	// }
-	//
-	// return parent;
-	// }
-	//
-	//
+	public void naturalSelection() {
+		ArrayList<Chromosome> temporaryList = new ArrayList<>();
+		;
+		int elitismPoint = (int) Math.round(chromePop.size() * elitismRatio);
+		for (int i = 0; i <= elitismPoint; i++) {
+			temporaryList.set(i, chromePop.get(i));
+		}
+
+		while (elitismPoint < temporaryList.size()) {
+
+			if (getFittest().fitness <= 5 && increaseMutation == false) {
+				mutationRatio = mutationRatio * 10;
+				increaseMutation = true;
+			}
+
+			if (getFittest().fitness <= 1 && increaseMutation2 == false) {
+				mutationRatio = mutationRatio * 25;
+				increaseMutation2 = true;
+			}
+
+			if (random.nextDouble() <= selectionRatio) {
+				ArrayList<Chromosome> parentVersions = new ArrayList<>();
+				parentVersions.set(0,tournament());
+				parentVersions.set(1, tournament());
+				ArrayList<Chromosome>childrenVersions = parentVersions.get(0).crossover(parentVersions.get(1));
+
+				if (random.nextDouble() <= mutationRatio) {
+
+					temporaryList.set(elitismPoint++,childrenVersions.get(0).mutation());
+				} else {
+					temporaryList.set(elitismPoint++, childrenVersions.get(0));
+				}
+
+				if (elitismPoint < temporaryList.size()) {
+					if (random.nextDouble() <= mutationRatio) {
+						temporaryList.set(elitismPoint, childrenVersions.get(1).mutation());
+					} else {
+						temporaryList.set(elitismPoint, childrenVersions.get(1));
+					}
+				}
+
+			}
+
+			else {
+				if (random.nextDouble() <= mutationRatio) {
+					temporaryList.set(elitismPoint, chromePop.get(elitismPoint).mutation());
+				} else {
+					temporaryList.set(elitismPoint, chromePop.get(elitismPoint));
+				}
+			}
+
+			++elitismPoint;
+		}
+		Collections.sort(temporaryList);
+		chromePop = temporaryList;
+
+	}
+
+	public Chromosome getFittest() {
+		return chromePop.get(0);
+	}
+
+	public Double Fitness() {
+	 return chromePop.get(0).fitness;
+	}
+
+	public Chromosome tournament() {
+		Chromosome parent;
+		parent = chromePop.get(random.nextInt(chromePop.size()));
+		for (int j = 0; j < tournamentSize; j++) {
+			int point = random.nextInt(chromePop.size());
+			if (chromePop.get(point).compareTo(parent) < 0) {
+				parent = chromePop.get(point);
+			}
+		}
+
+		return parent;
+	}
 
 }
