@@ -61,6 +61,7 @@ public class GeneticAlg {
 		
 		for (int j =0; j < pivotPoint; j++) {
 			for (int x=0; x< parent2.size(); x++) {
+				
 				if (!(parent2.get(j).equals(child1.get(x)))) {
 					   tempList.add(parent2.get(j));   
 			   }
@@ -69,7 +70,7 @@ public class GeneticAlg {
 			
 			
 		}
-		
+			
 		for (int j = pivotPoint; j < child1.size(); j++) {
 			child1.set(j, tempList.get(counter));
 			counter++;
@@ -77,20 +78,37 @@ public class GeneticAlg {
 		
 		tempList.clear();
 		counter = 0;
-
 		
-		for (int j =0; j < pivotPoint; j++) {
-			for (int x=0; x< parent1.size(); x++) {
-			   if (!(parent1.get(j).equals(child2.get(x)))) {
-				   tempList.add(parent1.get(j));
-				   
-			   }
+		
+		
+			for (int x=0; x< parent2.size(); x++) {
+				if (!child1.contains(parent2.get(x))) {
+					tempList.add(parent2.get(x));
+				}
 				
 			}
 			
 			
+		for (int j = pivotPoint; j < child1.size(); j++) {
+			child1.set(j, tempList.get(counter));
+			counter++;
 		}
 		
+		tempList.clear();
+		counter = 0;
+		
+		
+
+		
+	
+			for (int x=0; x< parent1.size(); x++) {
+				if (!child2.contains(parent1.get(x))) {
+					tempList.add(parent1.get(x));
+				   
+			   }
+				
+			}
+				
 		for (int j = pivotPoint; j < child1.size(); j++) {
 			child2.set(j, tempList.get(counter));
 			counter++;

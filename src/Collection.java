@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Random;
 
 public class Collection {	
@@ -19,130 +21,129 @@ public class Collection {
 	double elitismRatio = 0.2;
 	String targetString = "Hello, world!";
 	Random random = new Random();
-	ArrayList<GeneticAlg> arrayListCollection;
+	ArrayList<Chromosome> chromePop = new ArrayList<>();
+	HashMap<String, ArrayList<Integer>> mapPop = new HashMap<>();
 
-	public Collection() {
-		generateObjects();
+	public Collection(HashMap<String, ArrayList<Integer>> input) {
+		mapPop = input;
+		generatePopulation();
+		for(int i =0; i<chromePop.size(); i++) {
+//			System.out.println(chromePop.get(i).getCases());
+		}
 
 	}
 
 
-	public void naturalSelection() {
-		GeneticAlg[] temporaryList = new GeneticAlg[arrayCollection.length];
-		int elitismPoint = (int) Math.round(arrayCollection.length * elitismRatio);
-		for (int i = 0; i <= elitismPoint; i++) {
-			temporaryList[i] = arrayCollection[i];
-
+	public void generatePopulation() {
+		for (int i = 0; i < 20; i++) {
+			chromePop.add(generateChromosome());
 		}
 		
-		while (elitismPoint < temporaryList.length) {
-
-			if (getFittest().fitness <= 5 && increaseMutation == false) {
-				mutationRatio = mutationRatio * 10;
-				increaseMutation = true;
-			}
-			
-			if (getFittest().fitness <=1 && increaseMutation2 == false) {
-				mutationRatio = mutationRatio * 25;
-				increaseMutation2 = true;
-			}
+	}
 	
-			if (random.nextDouble() <= selectionRatio) {		
-				GeneticAlg[] parentVersions = new GeneticAlg[2];
-				parentVersions[0] = tournament();
-				parentVersions[1] = tournament();
-				GeneticAlg[] childrenVersions = parentVersions[0].crossover(parentVersions[1]);
-
-				if (random.nextDouble() <= mutationRatio) {
-				
-					temporaryList[elitismPoint++] = childrenVersions[0].mutation();
-				} else {
-					temporaryList[elitismPoint++] = childrenVersions[0];
-				}
-
-				if (elitismPoint < temporaryList.length) {
-					if (random.nextDouble() <= mutationRatio) {
-						temporaryList[elitismPoint] = childrenVersions[1].mutation();
-					} else {
-						temporaryList[elitismPoint] = childrenVersions[1];
-					}
-				}
-				
-			} 
-			
-			else {
-				if (random.nextDouble() <= mutationRatio) {
-					temporaryList[elitismPoint] = arrayCollection[elitismPoint].mutation();
-				} else {
-					temporaryList[elitismPoint] = arrayCollection[elitismPoint];
-				}
-			}
-
-			++elitismPoint;
+	public Chromosome generateChromosome() {
+		ArrayList<String> temp = new ArrayList<>();
+		ArrayList <Integer> randomValues = new ArrayList<>();
+		for(int i = 0; i < 5; i ++) {
+			int randomTest = random.nextInt(mapPop.size());
+//			randomValues.add(randomTest);
+//			if(!randomValues.contains(randomTest)) {
+				temp.add((String) mapPop.keySet().toArray()[randomTest]);	
 		}
-		Arrays.sort(temporaryList);
-		arrayCollection = temporaryList;
-
+		System.out.println("New Chromosome");
+		for (int i=0; i< temp.size(); i ++ ) {
+			System.out.println(temp.get(i));
+		}
+		System.out.print("\n");
+	
+		return new Chromosome(temp, 0);
 	}
 
-	public GeneticAlg getFittest() {
-		return arrayCollection[0];
-	}
-
-	public int Fitness() {
-		return arrayCollection[0].fitness;
-
-	}
-
-//	public void generateObjects() {
-//		ArrayList<Integer> matrix = new ArrayList<>();
-//		ArrayList <Integer> valueList = readFile();
-//		int i = 0; 
-//		while(i < valueList.size()) {
-//			for (int j = i; j<8; j++) {
-//				matrix.add(valueList.get(j));
-//				
-//			}
-//		System.out.println(matrix);	
-//		GeneticAlg alg = new GeneticAlg(matrix);
-//		arrayListCollection.add(alg);
-//		matrix.clear();
-//		i = i +8;
+	
+	
+//	public void naturalSelection() {
+//		GeneticAlg[] temporaryList = new GeneticAlg[arrayCollection.length];
+//		int elitismPoint = (int) Math.round(arrayCollection.length * elitismRatio);
+//		for (int i = 0; i <= elitismPoint; i++) {
+//			temporaryList[i] = arrayCollection[i];
+//
 //		}
 //		
+//		while (elitismPoint < temporaryList.length) {
+//
+//			if (getFittest().fitness <= 5 && increaseMutation == false) {
+//				mutationRatio = mutationRatio * 10;
+//				increaseMutation = true;
+//			}
+//			
+//			if (getFittest().fitness <=1 && increaseMutation2 == false) {
+//				mutationRatio = mutationRatio * 25;
+//				increaseMutation2 = true;
+//			}
+//	
+//			if (random.nextDouble() <= selectionRatio) {		
+//				GeneticAlg[] parentVersions = new GeneticAlg[2];
+//				parentVersions[0] = tournament();
+//				parentVersions[1] = tournament();
+//				GeneticAlg[] childrenVersions = parentVersions[0].crossover(parentVersions[1]);
+//
+//				if (random.nextDouble() <= mutationRatio) {
+//				
+//					temporaryList[elitismPoint++] = childrenVersions[0].mutation();
+//				} else {
+//					temporaryList[elitismPoint++] = childrenVersions[0];
+//				}
+//
+//				if (elitismPoint < temporaryList.length) {
+//					if (random.nextDouble() <= mutationRatio) {
+//						temporaryList[elitismPoint] = childrenVersions[1].mutation();
+//					} else {
+//						temporaryList[elitismPoint] = childrenVersions[1];
+//					}
+//				}
+//				
+//			} 
+//			
+//			else {
+//				if (random.nextDouble() <= mutationRatio) {
+//					temporaryList[elitismPoint] = arrayCollection[elitismPoint].mutation();
+//				} else {
+//					temporaryList[elitismPoint] = arrayCollection[elitismPoint];
+//				}
+//			}
+//
+//			++elitismPoint;
+//		}
+//		Arrays.sort(temporaryList);
+//		arrayCollection = temporaryList;
+//
 //	}
-	
-	
-	public GeneticAlg tournament() {
-		GeneticAlg parent;
-		parent = arrayCollection[random.nextInt(arrayCollection.length)];
-		for (int j = 0; j < tournamentSize; j++) {
-			int point = random.nextInt(arrayCollection.length);
-			if (arrayCollection[point].compareTo(parent) < 0) {
-				parent = arrayCollection[point];
-			}
-		}
-
-		return parent;
-	}
-	
-	public ArrayList<Integer> readFile() {
-		ArrayList<Integer> valuesList = new ArrayList<Integer>();
-		Path path = Paths.get("nanoxmltestfaultmatrix.txt");
-		try (InputStream in = Files.newInputStream(path);
-		    BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
-		    String line = null;
-		    while ((line = reader.readLine()) != null) {
-		    	if(!(line.contains(":"))) {
-		    		line = line.replaceAll("\\s+",""); 
-		    		valuesList.add(Integer.parseInt(line));
-		    	}  
-		    }
-		} catch (IOException x) {
-		    System.err.println(x);
-		}
-		return valuesList;
-		
-	}
+//
+//	public GeneticAlg getFittest() {
+//		return arrayCollection[0];
+//	}
+//
+//	public int Fitness() {
+//		return arrayCollection[0].fitness;
+//
+//	}
+//
+//
+//	
+//	
+//	public GeneticAlg tournament() {
+//		GeneticAlg parent;
+//		parent = arrayCollection[random.nextInt(arrayCollection.length)];
+//		for (int j = 0; j < tournamentSize; j++) {
+//			int point = random.nextInt(arrayCollection.length);
+//			if (arrayCollection[point].compareTo(parent) < 0) {
+//				parent = arrayCollection[point];
+//			}
+//		}
+//
+//		return parent;
+//	}
+//	
+//	
 
 }

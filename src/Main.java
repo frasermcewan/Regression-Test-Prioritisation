@@ -9,12 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class Main {
 
+public class Main {
+	
 	public static void main(String[] args) {
-		
-		read();
-//		Collection col = new Collection();
+		Collection col = new Collection(read());
 //		col.readFile();
 //		GeneticAlg alpha = col.getFittest();
 //		int i = 0;
@@ -29,9 +28,9 @@ public class Main {
 //		System.out.println("Final Version " + i + ": " + alpha.getVersion() + "\n");
 	}
 	
-	private static void read(){
-		HashMap<String, ArrayList<Integer>> population = new HashMap<>();
+	private static HashMap<String, ArrayList<Integer>>  read(){
 		
+		HashMap<String, ArrayList<Integer>> population = new HashMap<>();
 		ArrayList<Integer> valuesList = new ArrayList<Integer>();
 		Path path = Paths.get("nanoxmltestfaultmatrix.txt");
 		try (InputStream in = Files.newInputStream(path);
@@ -60,9 +59,11 @@ public class Main {
 			i = i + 9;
 			counter++;
 		}
-		System.out.println(population);
+//		System.out.println(population);
+		return population;
 		
 	}
+	
 
 }
 
