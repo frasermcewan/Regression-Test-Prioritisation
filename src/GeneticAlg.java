@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class GeneticAlg implements Comparable<GeneticAlg> {
+public class GeneticAlg {
 	Random random = new Random();
 	ArrayList<Integer> chromoIn = new ArrayList<>();
 	ArrayList<Chromosome> List = new ArrayList<>();
@@ -20,23 +20,6 @@ public class GeneticAlg implements Comparable<GeneticAlg> {
 		return String.valueOf(chromoIn);
 	}
 	
-	public void generateObjects() {
-		ArrayList<Integer> matrix = new ArrayList<>();
-		ArrayList <Integer> valueList = readFile();
-		int i = 0; 
-		while(i < valueList.size()) {
-			for (int j = i; j<8; j++) {
-				matrix.add(valueList.get(j));
-				
-			}
-		System.out.println(matrix);	
-		GeneticAlg alg = new GeneticAlg(matrix);
-		arrayListCollection.add(alg);
-		matrix.clear();
-		i = i +8;
-		}
-		
-	}
 
 	public void setFitness(ArrayList<Integer>chromo) {
 		for (int i = 0; i < chromo.size(); i++) {
@@ -48,32 +31,27 @@ public class GeneticAlg implements Comparable<GeneticAlg> {
 	public int returnFitness() {
 		return fitness;
 	}
-
-	public char[] toCharArray(String In) {
-		char[] convertorArray;
-		convertorArray = In.toCharArray();
-		return convertorArray;
-	}
-
-	public Chromosome mutation() {
-		ArrayList<Integer> matrix = chromoIn;
+	
+	public Chromosome mutation(Chromosome in) {
+		ArrayList<String> matrix = in.getCases();
 		int randomPoint1 = random.nextInt(matrix.size());
 		int randomPoint2 = random.nextInt(matrix.size());
-		int pointOneValue = matrix.get(randomPoint1);
-		int pointTwoValue = matrix.get(randomPoint2);
+		String pointOneValue = matrix.get(randomPoint1);
+		String pointTwoValue = matrix.get(randomPoint2);
 		matrix.set(randomPoint1, pointTwoValue);
 		matrix.set(randomPoint2, pointOneValue);
-		return new Chromosome(matrix);
+		return new Chromosome(matrix, 0);
 
 	}
 
-	public Chromosome[] crossover(GeneticAlg partner) {
-		ArrayList<Integer> parent1 = chromoIn;
-		ArrayList<Integer> parent2 = partner.chromoIn;
+	public Chromosome[] crossover(Chromosome partner1, Chromosome partner2) {
+		ArrayList<String> parent1 = partner1.getCases();
+		ArrayList<String> parent2 = partner2.getCases();
 		int pivotPoint = random.nextInt(parent1.size());
-		
-		ArrayList<Integer> child1 = new ArrayList<>();
-		ArrayList<Integer> child2 = new ArrayList<>();
+		int counter = 0;
+		ArrayList<String> child1 = new ArrayList<>();
+		ArrayList<String> child2 = new ArrayList<>();
+		ArrayList<String> tempList = new ArrayList<>();
 		
 		for (int k=0; k<=pivotPoint; k++) {
 			child1.set(k, parent1.get(k));
@@ -81,27 +59,48 @@ public class GeneticAlg implements Comparable<GeneticAlg> {
 		}
 		
 		
-		for (int j = pivotPoint; j < child1.size(); j++) {
+		for (int j =0; j < pivotPoint; j++) {
 			for (int x=0; x< parent2.size(); x++) {
+				if (!(parent2.get(j).equals(child1.get(x)))) {
+					   tempList.add(parent2.get(j));   
+			   }
+			   
+			}
+			
+			
+		}
+		
+		for (int j = pivotPoint; j < child1.size(); j++) {
+			child1.set(j, tempList.get(counter));
+			counter++;
+		}
+		
+		tempList.clear();
+		counter = 0;
+
+		
+		for (int j =0; j < pivotPoint; j++) {
+			for (int x=0; x< parent1.size(); x++) {
+			   if (!(parent1.get(j).equals(child2.get(x)))) {
+				   tempList.add(parent1.get(j));
+				   
+			   }
 				
 			}
 			
+			
+		}
+		
+		for (int j = pivotPoint; j < child1.size(); j++) {
+			child2.set(j, tempList.get(counter));
+			counter++;
 		}
 
-		return new Chromosome[] { new Chromosome((child1)), new Chromsome((child2)) };
+		tempList.clear();
+		counter = 0;
+		
+		return new Chromosome[] { new Chromosome((child1), 0), new Chromosome((child2), 0) };
 	}
 		
-
-	@Override
-	public int compareTo(GeneticAlg o) {
-		if (fitness < o.fitness) {
-			return -1;
-		} else if (fitness > o.fitness) {
-			return 1;
-		} else {
-		return 0;
-		}
-
-	}
 
 }
