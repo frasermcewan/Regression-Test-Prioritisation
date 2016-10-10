@@ -14,6 +14,20 @@ public class Main {
 
 	public static void main(String[] args) {
 		Collection col = new Collection(read(), numTests);
+		Chromosome alpha = col.getFittest();
+		int i = 0;
+		int j = 0;
+
+		while (alpha.getFitness() != 1) {
+			System.out.println(alpha.getVersion() + ' ' + i + " Fitness  " + alpha.fitness);
+			col.naturalSelection();
+			alpha = col.getFittest();
+			i++;
+		}
+
+		System.out.println("Final Version " + i + ": " + alpha.getVersion() + "\n");
+		
+		
 	}
 
 	private static HashMap<String, ArrayList<Integer>> read() {

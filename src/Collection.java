@@ -28,9 +28,9 @@ public class Collection {
 			chromePop.add(generateChromosome());
 		}
 
-		for (int j = 0; j < chromePop.size(); j++) {
-			System.out.println(chromePop.get(j).getFitness());
-		}
+//		for (int j = 0; j < chromePop.size(); j++) {
+//			System.out.println(chromePop.get(j).getFitness());
+//		}
 		
 	}
 
@@ -57,6 +57,9 @@ public class Collection {
 		ArrayList<Chromosome> temporaryList = new ArrayList<>();
 		;
 		int elitismPoint = (int) Math.round(chromePop.size() * elitismRatio);
+		for (int j =0; j <= elitismPoint; j++) {
+			temporaryList.add(j, null);
+		}
 		for (int i = 0; i <= elitismPoint; i++) {
 			temporaryList.set(i, chromePop.get(i));
 		}

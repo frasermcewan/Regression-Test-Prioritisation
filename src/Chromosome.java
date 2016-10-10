@@ -18,6 +18,14 @@ public class Chromosome implements Comparable<Chromosome> {
 		setFitness();
 	}
 
+	public String getVersion() {
+		/**
+		 * Accessory method in order to return the String value of the current char array
+		 */
+		return String.valueOf(getCases());
+	}
+	
+	
 	public void setFitness() {
 		double additionFunction = 0.0;
 
