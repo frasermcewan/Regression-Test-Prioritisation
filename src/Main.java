@@ -14,25 +14,31 @@ public class Main {
 	
 	public static void main(String[] args) {
 		Collection col = new Collection(read());
-//		col.readFile();
-//		GeneticAlg alpha = col.getFittest();
-//		int i = 0;
-//
-//		while (alpha.returnFitness() != 0) {
-//			System.out.println(alpha.getVersion() + ' ' + i + " Fitness  " + alpha.fitness);
-//			col.naturalSelection();
-//			alpha = col.getFittest();
-//			i++;
-//		}
-//
-//		System.out.println("Final Version " + i + ": " + alpha.getVersion() + "\n");
 	}
 	
 	private static HashMap<String, ArrayList<Integer>>  read(){
-		
+		int numTests = 0;
+		boolean numberOfTests = false;
 		HashMap<String, ArrayList<Integer>> population = new HashMap<>();
 		ArrayList<Integer> valuesList = new ArrayList<Integer>();
 		Path path = Paths.get("nanoxmltestfaultmatrix.txt");
+		try (InputStream sizeCalculator = Files.newInputStream(path);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(sizeCalculator))) {
+		    String sizeCalc = null;
+		    while ((sizeCalc = reader.readLine()) != null) {
+		    	if(!(sizeCalc.contains("unitest1")) && numberOfTests == false) {
+		    		numTests++;
+
+		    	} else if (sizeCalc.contains("unitest1") && numberOfTests == false) {
+		    		numTests = numTests/2;
+		    	numberOfTests = true;
+		    	break;
+		    	}
+		    }
+		} catch (IOException x) {
+		    System.err.println(x);
+		}	
+				
 		try (InputStream in = Files.newInputStream(path);
 		    BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
 		    String line = null;
@@ -50,7 +56,7 @@ public class Main {
 		int counter = 0;
 		while(i < valuesList.size()) {
 			ArrayList<Integer> temp = new ArrayList<>();
-			for (int j = i; j < (i+9); j++) {
+			for (int j = i; j < (i+numTests); j++) {
 				temp.add(valuesList.get(j));
 			}
 			String name = "UNIT-TEST_" + Integer.toString(counter);

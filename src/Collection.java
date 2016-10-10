@@ -1,14 +1,5 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Random;
 
 public class Collection {	
@@ -49,12 +40,8 @@ public class Collection {
 			if(!randomValues.contains(randomTest)) {
 				temp.add((String) mapPop.keySet().toArray()[randomTest]);	
 			} 
-			
-			
+						
 			randomValues.add(randomTest);
-
-			temp.add((String) mapPop.keySet().toArray()[randomTest]);	
-
 		}
 		double fitness = setFitness(temp); 
 		System.out.println("New Chromosome - " + fitness);

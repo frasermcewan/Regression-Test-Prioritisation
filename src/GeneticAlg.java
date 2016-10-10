@@ -16,10 +16,6 @@ public class GeneticAlg {
 		setFitness(chromoIn);
 	}
 
-	public String getVersion() {
-		return String.valueOf(chromoIn);
-	}
-	
 
 	public void setFitness(ArrayList<Integer>chromo) {
 		for (int i = 0; i < chromo.size(); i++) {
