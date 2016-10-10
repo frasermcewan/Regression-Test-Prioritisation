@@ -26,15 +26,6 @@ public class Collection {
 
 	}
 
-//	public GeneticAlg[] generateCollection() {
-//		GeneticAlg[] temp;
-//		temp = new GeneticAlg[collectionSize];
-//		for (int i = 0; i < collectionSize; i++) {
-//			temp[i] = generateStrings();
-//		}
-//		
-//		return temp;
-//	}
 
 	public void naturalSelection() {
 		GeneticAlg[] temporaryList = new GeneticAlg[arrayCollection.length];
@@ -103,23 +94,23 @@ public class Collection {
 
 	}
 
-	public void generateObjects() {
-		ArrayList<Integer> matrix = new ArrayList<>();
-		ArrayList <Integer> valueList = readFile();
-		int i = 0; 
-		while(i < valueList.size()) {
-			for (int j = i; j<8; j++) {
-				matrix.add(valueList.get(j));
-				
-			}
-		System.out.println(matrix);	
-		GeneticAlg alg = new GeneticAlg(matrix);
-		arrayListCollection.add(alg);
-		matrix.clear();
-		i =i +8;
-		}
-		
-	}
+//	public void generateObjects() {
+//		ArrayList<Integer> matrix = new ArrayList<>();
+//		ArrayList <Integer> valueList = readFile();
+//		int i = 0; 
+//		while(i < valueList.size()) {
+//			for (int j = i; j<8; j++) {
+//				matrix.add(valueList.get(j));
+//				
+//			}
+//		System.out.println(matrix);	
+//		GeneticAlg alg = new GeneticAlg(matrix);
+//		arrayListCollection.add(alg);
+//		matrix.clear();
+//		i = i +8;
+//		}
+//		
+//	}
 	
 	
 	public GeneticAlg tournament() {

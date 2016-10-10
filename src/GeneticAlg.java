@@ -3,24 +3,44 @@ import java.util.Random;
 
 public class GeneticAlg implements Comparable<GeneticAlg> {
 	Random random = new Random();
-	char[] chromoIn;
+	ArrayList<Integer> chromoIn = new ArrayList<>();
+	ArrayList<Chromosome> List = new ArrayList<>();
 	int fitness = 0;
-	int stringLength;
+	int testLength = 0;
+	String testName;
 	char[] targetStringinArray = "Hello, world!".toCharArray();
 
 	public GeneticAlg(ArrayList<Integer> matrix) {
-		this.stringLength = initialString.length();
-		this.chromoIn = toCharArray(initialString);
+		this.testLength = matrix.size();
+		this.chromoIn = matrix;
 		setFitness(chromoIn);
 	}
 
 	public String getVersion() {
 		return String.valueOf(chromoIn);
 	}
+	
+	public void generateObjects() {
+		ArrayList<Integer> matrix = new ArrayList<>();
+		ArrayList <Integer> valueList = readFile();
+		int i = 0; 
+		while(i < valueList.size()) {
+			for (int j = i; j<8; j++) {
+				matrix.add(valueList.get(j));
+				
+			}
+		System.out.println(matrix);	
+		GeneticAlg alg = new GeneticAlg(matrix);
+		arrayListCollection.add(alg);
+		matrix.clear();
+		i = i +8;
+		}
+		
+	}
 
-	public void setFitness(char[] chromo) {
-		for (int i = 0; i < chromo.length; i++) {
-			fitness += Math.abs(((int) chromo[i]) - ((int) targetStringinArray[i]));
+	public void setFitness(ArrayList<Integer>chromo) {
+		for (int i = 0; i < chromo.size(); i++) {
+			fitness += Math.abs(((int) chromo.get(i) - ((int) targetStringinArray[i])));
 		}
 
 	}
@@ -35,61 +55,42 @@ public class GeneticAlg implements Comparable<GeneticAlg> {
 		return convertorArray;
 	}
 
-	public GeneticAlg mutation() {
-		char[] mutArray = chromoIn;
-		int randomPoint = random.nextInt(mutArray.length);
-		int newValue = (random.nextInt(90) + 32);
-		mutArray[randomPoint] = (char) (newValue);
-		return new GeneticAlg(String.valueOf(mutArray));
+	public Chromosome mutation() {
+		ArrayList<Integer> matrix = chromoIn;
+		int randomPoint1 = random.nextInt(matrix.size());
+		int randomPoint2 = random.nextInt(matrix.size());
+		int pointOneValue = matrix.get(randomPoint1);
+		int pointTwoValue = matrix.get(randomPoint2);
+		matrix.set(randomPoint1, pointTwoValue);
+		matrix.set(randomPoint2, pointOneValue);
+		return new Chromosome(matrix);
 
 	}
 
-	public GeneticAlg[] crossover(GeneticAlg partner) {
-		char[] parent1 = chromoIn;
-		char[] parent2 = partner.chromoIn;
-		int pivotPoint = random.nextInt(parent1.length);
-		char[] child1 = new char[stringLength];
-		char[] child2 = new char[stringLength];		
-		for (int i = 0; i <= pivotPoint; i++) {
-			for (int q = 0; q <= pivotPoint; q++) {
-				if (parent2[q] != parent1[i]){
-					
-				}
+	public Chromosome[] crossover(GeneticAlg partner) {
+		ArrayList<Integer> parent1 = chromoIn;
+		ArrayList<Integer> parent2 = partner.chromoIn;
+		int pivotPoint = random.nextInt(parent1.size());
+		
+		ArrayList<Integer> child1 = new ArrayList<>();
+		ArrayList<Integer> child2 = new ArrayList<>();
+		
+		for (int k=0; k<=pivotPoint; k++) {
+			child1.set(k, parent1.get(k));
+			child2.set(k, parent2.get(k));
+		}
+		
+		
+		for (int j = pivotPoint; j < child1.size(); j++) {
+			for (int x=0; x< parent2.size(); x++) {
 				
 			}
-			child1[i] = parent1[i];
-			child2[i] = parent2[i];
-
+			
 		}
 
-		for (int j = pivotPoint; j < child1.length; j++) {
-			child1[j] = parent2[j];
-			child2[j] = parent1[j];
-		}
-
-		return new GeneticAlg[] { new GeneticAlg(String.valueOf(child1)), new GeneticAlg(String.valueOf(child2)) };
+		return new Chromosome[] { new Chromosome((child1)), new Chromsome((child2)) };
 	}
-	
-	public GeneticAlg[] crossoverEdited(GeneticAlg partner) {
-		char[] parent1 = chromoIn;
-		char[] parent2 = partner.chromoIn;
-		int pivotPoint = random.nextInt(parent1.length);
-		char[] child1 = new char[stringLength];
-		char[] child2 = new char[stringLength];		
-		for (int i = 0; i <= pivotPoint; i++) {
-			child1[i] = parent1[i];
-			child2[i] = parent2[i];
-
-		}
-
-		for (int j = pivotPoint; j < child1.length; j++) {
-			child1[j] = parent2[j];
-			child2[j] = parent1[j];
-		}
-
-		return new GeneticAlg[] { new GeneticAlg(String.valueOf(child1)), new GeneticAlg(String.valueOf(child2)) };
-	}
-	
+		
 
 	@Override
 	public int compareTo(GeneticAlg o) {
