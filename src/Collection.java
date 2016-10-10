@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-public class Collection {	
+public class Collection {
 	int tournamentSize = 5;
 	int collectionSize = 1000;
 	double mutationRatio = 0.02;
@@ -22,120 +22,121 @@ public class Collection {
 		generatePopulation();
 	}
 
-
 	public void generatePopulation() {
 		for (int i = 0; i < 20; i++) {
 			chromePop.add(generateChromosome());
 		}
-		
-		for (int j =0; j < chromePop.size(); j++) {
+
+		for (int j = 0; j < chromePop.size(); j++) {
 			System.out.println(chromePop.get(j).getFitness());
 		}
 		System.out.println(chromePop.size());
 	}
-	
+
 	public Chromosome generateChromosome() {
 		ArrayList<String> temp = new ArrayList<>();
 		ArrayList<Integer> randomValues = new ArrayList<>();
-		for(int i = 0; i < 5; i ++) {
+		for (int i = 0; i < 5; i++) {
 			int randomTest = random.nextInt(mapPop.size());
 			if (randomValues.contains(randomTest) == true) {
-				i = i -1;
+				i = i - 1;
 			}
-			if(!randomValues.contains(randomTest)) {
-				temp.add((String) mapPop.keySet().toArray()[randomTest]);	
-			} 
-						
+			if (!randomValues.contains(randomTest)) {
+				temp.add((String) mapPop.keySet().toArray()[randomTest]);
+			}
+
 			randomValues.add(randomTest);
 		}
 
 		return new Chromosome(temp, 0.0, numberOfFaults, mapPop);
-		
+
 	}
-	
-//	public void naturalSelection() {
-//		GeneticAlg[] temporaryList = new GeneticAlg[arrayCollection.length];
-//		int elitismPoint = (int) Math.round(arrayCollection.length * elitismRatio);
-//		for (int i = 0; i <= elitismPoint; i++) {
-//			temporaryList[i] = arrayCollection[i];
-//
-//		}
-//		
-//		while (elitismPoint < temporaryList.length) {
-//
-//			if (getFittest().fitness <= 5 && increaseMutation == false) {
-//				mutationRatio = mutationRatio * 10;
-//				increaseMutation = true;
-//			}
-//			
-//			if (getFittest().fitness <=1 && increaseMutation2 == false) {
-//				mutationRatio = mutationRatio * 25;
-//				increaseMutation2 = true;
-//			}
-//	
-//			if (random.nextDouble() <= selectionRatio) {		
-//				GeneticAlg[] parentVersions = new GeneticAlg[2];
-//				parentVersions[0] = tournament();
-//				parentVersions[1] = tournament();
-//				GeneticAlg[] childrenVersions = parentVersions[0].crossover(parentVersions[1]);
-//
-//				if (random.nextDouble() <= mutationRatio) {
-//				
-//					temporaryList[elitismPoint++] = childrenVersions[0].mutation();
-//				} else {
-//					temporaryList[elitismPoint++] = childrenVersions[0];
-//				}
-//
-//				if (elitismPoint < temporaryList.length) {
-//					if (random.nextDouble() <= mutationRatio) {
-//						temporaryList[elitismPoint] = childrenVersions[1].mutation();
-//					} else {
-//						temporaryList[elitismPoint] = childrenVersions[1];
-//					}
-//				}
-//				
-//			} 
-//			
-//			else {
-//				if (random.nextDouble() <= mutationRatio) {
-//					temporaryList[elitismPoint] = arrayCollection[elitismPoint].mutation();
-//				} else {
-//					temporaryList[elitismPoint] = arrayCollection[elitismPoint];
-//				}
-//			}
-//
-//			++elitismPoint;
-//		}
-//		Arrays.sort(temporaryList);
-//		arrayCollection = temporaryList;
-//
-//	}
-//
-//	public GeneticAlg getFittest() {
-//		return arrayCollection[0];
-//	}
-//
-//	public int Fitness() {
-//		return arrayCollection[0].fitness;
-//
-//	}
-//
-//
-//	
-//	
-//	public GeneticAlg tournament() {
-//		GeneticAlg parent;
-//		parent = arrayCollection[random.nextInt(arrayCollection.length)];
-//		for (int j = 0; j < tournamentSize; j++) {
-//			int point = random.nextInt(arrayCollection.length);
-//			if (arrayCollection[point].compareTo(parent) < 0) {
-//				parent = arrayCollection[point];
-//			}
-//		}
-//
-//		return parent;
-//	}
-//	
-//	
+
+	// public void naturalSelection() {
+	// GeneticAlg[] temporaryList = new GeneticAlg[arrayCollection.length];
+	// int elitismPoint = (int) Math.round(arrayCollection.length *
+	// elitismRatio);
+	// for (int i = 0; i <= elitismPoint; i++) {
+	// temporaryList[i] = arrayCollection[i];
+	//
+	// }
+	//
+	// while (elitismPoint < temporaryList.length) {
+	//
+	// if (getFittest().fitness <= 5 && increaseMutation == false) {
+	// mutationRatio = mutationRatio * 10;
+	// increaseMutation = true;
+	// }
+	//
+	// if (getFittest().fitness <=1 && increaseMutation2 == false) {
+	// mutationRatio = mutationRatio * 25;
+	// increaseMutation2 = true;
+	// }
+	//
+	// if (random.nextDouble() <= selectionRatio) {
+	// GeneticAlg[] parentVersions = new GeneticAlg[2];
+	// parentVersions[0] = tournament();
+	// parentVersions[1] = tournament();
+	// GeneticAlg[] childrenVersions =
+	// parentVersions[0].crossover(parentVersions[1]);
+	//
+	// if (random.nextDouble() <= mutationRatio) {
+	//
+	// temporaryList[elitismPoint++] = childrenVersions[0].mutation();
+	// } else {
+	// temporaryList[elitismPoint++] = childrenVersions[0];
+	// }
+	//
+	// if (elitismPoint < temporaryList.length) {
+	// if (random.nextDouble() <= mutationRatio) {
+	// temporaryList[elitismPoint] = childrenVersions[1].mutation();
+	// } else {
+	// temporaryList[elitismPoint] = childrenVersions[1];
+	// }
+	// }
+	//
+	// }
+	//
+	// else {
+	// if (random.nextDouble() <= mutationRatio) {
+	// temporaryList[elitismPoint] = arrayCollection[elitismPoint].mutation();
+	// } else {
+	// temporaryList[elitismPoint] = arrayCollection[elitismPoint];
+	// }
+	// }
+	//
+	// ++elitismPoint;
+	// }
+	// Arrays.sort(temporaryList);
+	// arrayCollection = temporaryList;
+	//
+	// }
+	//
+	// public GeneticAlg getFittest() {
+	// return arrayCollection[0];
+	// }
+	//
+	// public int Fitness() {
+	// return arrayCollection[0].fitness;
+	//
+	// }
+	//
+	//
+	//
+	//
+	// public GeneticAlg tournament() {
+	// GeneticAlg parent;
+	// parent = arrayCollection[random.nextInt(arrayCollection.length)];
+	// for (int j = 0; j < tournamentSize; j++) {
+	// int point = random.nextInt(arrayCollection.length);
+	// if (arrayCollection[point].compareTo(parent) < 0) {
+	// parent = arrayCollection[point];
+	// }
+	// }
+	//
+	// return parent;
+	// }
+	//
+	//
 
 }
