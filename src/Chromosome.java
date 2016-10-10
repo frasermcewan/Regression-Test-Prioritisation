@@ -10,8 +10,11 @@ public class Chromosome implements Comparable<Chromosome> {
 	}
 	
 	
+	public int getFitness() {
+		return fitness;
+	}
 
-
+	
 	public ArrayList<String> getCases() {
 		return testValues;
 	}

@@ -27,10 +27,6 @@ public class Collection {
 	public Collection(HashMap<String, ArrayList<Integer>> input) {
 		mapPop = input;
 		generatePopulation();
-		for(int i =0; i<chromePop.size(); i++) {
-//			System.out.println(chromePop.get(i).getCases());
-		}
-
 	}
 
 
@@ -46,16 +42,21 @@ public class Collection {
 		ArrayList <Integer> randomValues = new ArrayList<>();
 		for(int i = 0; i < 5; i ++) {
 			int randomTest = random.nextInt(mapPop.size());
-//			randomValues.add(randomTest);
-//			if(!randomValues.contains(randomTest)) {
+			if (randomValues.contains(randomTest) == true) {
+				i = i -1;
+			}
+			if(!randomValues.contains(randomTest)) {
 				temp.add((String) mapPop.keySet().toArray()[randomTest]);	
+			} 
+			
+			
+			randomValues.add(randomTest);
 		}
 		System.out.println("New Chromosome");
 		for (int i=0; i< temp.size(); i ++ ) {
 			System.out.println(temp.get(i));
 		}
-		System.out.print("\n");
-	
+		System.out.println("\n");
 		return new Chromosome(temp, 0);
 	}
 
