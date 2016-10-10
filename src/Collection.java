@@ -55,11 +55,13 @@ public class Collection {
 
 	public void naturalSelection() {
 		ArrayList<Chromosome> temporaryList = new ArrayList<>();
-		;
+		
 		int elitismPoint = (int) Math.round(chromePop.size() * elitismRatio);
-		for (int j =0; j <= elitismPoint; j++) {
+		for (int j =0; j < chromePop.size(); j++) {
 			temporaryList.add(j, null);
 		}
+		System.out.println("Elitism Point\t" + elitismPoint);
+		System.out.println("Temp List Size\t" +temporaryList.size());
 		for (int i = 0; i <= elitismPoint; i++) {
 			temporaryList.set(i, chromePop.get(i));
 		}
@@ -78,9 +80,16 @@ public class Collection {
 
 			if (random.nextDouble() <= selectionRatio) {
 				ArrayList<Chromosome> parentVersions = new ArrayList<>();
+				for (int i = 0; i <2; i ++){
+					parentVersions.add(i, null);
+				}
 				parentVersions.set(0,tournament());
 				parentVersions.set(1, tournament());
-				ArrayList<Chromosome>childrenVersions = parentVersions.get(0).crossover(parentVersions.get(1));
+				ArrayList<Chromosome>childrenVersions = new ArrayList<>();
+				for (int i = 0; i <2; i ++){
+					childrenVersions.add(i, null);
+				}
+				childrenVersions = parentVersions.get(0).crossover(parentVersions.get(1));
 
 				if (random.nextDouble() <= mutationRatio) {
 
