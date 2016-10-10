@@ -12,12 +12,13 @@ import java.util.HashMap;
 
 public class Main {
 	
+	public static int numTests = 0;
+	
 	public static void main(String[] args) {
-		Collection col = new Collection(read());
+		Collection col = new Collection(read(), numTests);
 	}
 	
 	private static HashMap<String, ArrayList<Integer>>  read(){
-		int numTests = 0;
 		boolean numberOfTests = false;
 		HashMap<String, ArrayList<Integer>> population = new HashMap<>();
 		ArrayList<Integer> valuesList = new ArrayList<Integer>();

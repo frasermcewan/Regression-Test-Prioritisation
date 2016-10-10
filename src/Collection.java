@@ -14,10 +14,11 @@ public class Collection {
 	Random random = new Random();
 	ArrayList<Chromosome> chromePop = new ArrayList<>();
 	HashMap<String, ArrayList<Integer>> mapPop = new HashMap<>();
-	int numberOfFaults = 9;
+	int numberOfFaults = 0;
 
-	public Collection(HashMap<String, ArrayList<Integer>> input) {
+	public Collection(HashMap<String, ArrayList<Integer>> input, Integer faults) {
 		mapPop = input;
+		numberOfFaults = faults;
 		generatePopulation();
 	}
 
