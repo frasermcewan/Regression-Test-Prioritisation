@@ -28,6 +28,10 @@ public class Collection {
 			chromePop.add(generateChromosome());
 		}
 		
+		for (int j =0; j < chromePop.size(); j++) {
+			System.out.println(chromePop.get(j).getFitness());
+		}
+		System.out.println(chromePop.size());
 	}
 	
 	public Chromosome generateChromosome() {
@@ -44,39 +48,9 @@ public class Collection {
 						
 			randomValues.add(randomTest);
 		}
-		double fitness = setFitness(temp); 
-		System.out.println("New Chromosome - " + fitness);
-		for (int i=0; i< temp.size(); i ++ ) {
-			System.out.println(temp.get(i));
-		}
-		System.out.println("\n");
-		return new Chromosome(temp, 0);
-		//return new Chromosome(temp, setFitness(temp)); 
-	}
 
-	private Double setFitness(ArrayList<String> input){
-		double fitness = 0;
-		double additionFunction = 0;
+		return new Chromosome(temp, 0.0, numberOfFaults, mapPop);
 		
-		for(int i = 0; i < numberOfFaults; i++){//number of faults
-			for(int j = 0; j < input.size(); j++){ //number of test cases
-				ArrayList<Integer> temp = mapPop.get(input.get(j));
-				if(temp.get(i) == 1){
-					additionFunction = additionFunction + (i+1);
-					break;
-				}
-			}
-		}
-		//System.out.println(additionFunction);
-		/*
-		0/0/0/0/0/0/1/0/0
-		0/0/0/0/0/0/1/0/0
-		0/0/0/0/0/0/1/0/0
-		0/0/0/0/0/0/1/0/0
-		0/0/0/0/0/0/1/0/0
-		WILL = 7*/
-		fitness = (1-(additionFunction/(numberOfFaults*5))+(1/(2*numberOfFaults)));
-		return fitness;
 	}
 	
 //	public void naturalSelection() {
