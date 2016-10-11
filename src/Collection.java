@@ -24,8 +24,8 @@ public class Collection {
 	}
 
 	
-	public ArrayList<String> populateArrayLists(ArrayList<String> in) {
-		ArrayList<String> populateList = new ArrayList<String>();
+	public ArrayList<Chromosome> populateArrayLists(ArrayList<String> in) {
+		ArrayList<Chromosome> populateList = new ArrayList<Chromosome>();
 		for(int i =0; i < in.size(); i++) {
 			populateList.set(i, null);
 		}
@@ -64,7 +64,7 @@ public class Collection {
 	}
 
 	public void naturalSelection() {
-		ArrayList<Chromosome> temporaryList = new ArrayList<>();
+		ArrayList<Chromosome> temporaryList = new ArrayList<Chromosome>();
 		
 		int elitismPoint = (int) Math.round(chromePop.size() * elitismRatio);
 		for (int j =0; j < chromePop.size(); j++) {
