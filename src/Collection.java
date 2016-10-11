@@ -23,6 +23,16 @@ public class Collection {
 		generatePopulation();
 	}
 
+	
+	public ArrayList<String> populateArrayLists(ArrayList<String> in) {
+		ArrayList<String> populateList = new ArrayList<String>();
+		for(int i =0; i < in.size(); i++) {
+			populateList.set(i, null);
+		}
+		return populateList;
+		
+	}
+	
 	public void generatePopulation() {
 		for (int i = 0; i < collectionSize; i++) {
 			chromePop.add(generateChromosome());
@@ -60,8 +70,7 @@ public class Collection {
 		for (int j =0; j < chromePop.size(); j++) {
 			temporaryList.add(j, null);
 		}
-		System.out.println("Elitism Point\t" + elitismPoint);
-		System.out.println("Temp List Size\t" +temporaryList.size());
+		
 		for (int i = 0; i <= elitismPoint; i++) {
 			temporaryList.set(i, chromePop.get(i));
 		}

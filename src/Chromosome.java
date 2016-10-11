@@ -19,9 +19,6 @@ public class Chromosome implements Comparable<Chromosome> {
 	}
 
 	public String getVersion() {
-		/**
-		 * Accessory method in order to return the String value of the current char array
-		 */
 		return String.valueOf(getCases());
 	}
 	
@@ -84,7 +81,7 @@ public class Chromosome implements Comparable<Chromosome> {
 
 		}
 
-		for (int j = pivotPoint; j <= child1.size(); j++) {
+		for (int j = pivotPoint; j < child1.size(); j++) {
 			child1.set(j, tempList.get(counter));
 			counter++;
 		}
@@ -100,7 +97,7 @@ public class Chromosome implements Comparable<Chromosome> {
 
 		}
 
-		for (int j = pivotPoint; j <= child1.size(); j++) {
+		for (int j = pivotPoint; j < child1.size(); j++) {
 			child2.set(j, tempList.get(counter));
 			counter++;
 		}
@@ -122,6 +119,15 @@ public class Chromosome implements Comparable<Chromosome> {
 		return testValues;
 	}
 
+	public ArrayList<String> populateArrayLists(ArrayList<String> in) {
+		ArrayList<String> populateList = new ArrayList<String>();
+		for(int i =0; i < in.size(); i++) {
+			populateList.set(i, null);
+		}
+		return populateList;
+		
+	}
+	
 	@Override
 	public int compareTo(Chromosome o) {
 		if (fitness < o.fitness) {
