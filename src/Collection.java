@@ -37,11 +37,6 @@ public class Collection {
 		for (int i = 0; i < collectionSize; i++) {
 			chromePop.add(generateChromosome());
 		}
-
-//		for (int j = 0; j < chromePop.size(); j++) {
-//			System.out.println(chromePop.get(j).getFitness());
-//		}
-		
 	}
 
 	public Chromosome generateChromosome() {
@@ -74,23 +69,10 @@ public class Collection {
 		for (int i = 0; i <= elitismPoint; i++) {
 			temporaryList.set(i, chromePop.get(i));
 		}
-
-		
 		
 		while (elitismPoint < temporaryList.size()) {
 
-//			if (getFittest().fitness <= 5 && increaseMutation == false) {
-//				mutationRatio = mutationRatio * 10;
-//				increaseMutation = true;
-//			}
-//
-//			if (getFittest().fitness <= 1 && increaseMutation2 == false) {
-//				mutationRatio = mutationRatio * 25;
-//				increaseMutation2 = true;
-//			}
-
 			if (random.nextDouble() <= selectionRatio) {
-//				System.out.println("Reached Crossover ");
 				ArrayList<Chromosome> parentVersions = new ArrayList<>();
 				for (int i = 0; i <2; i ++){
 					parentVersions.add(i, null);
@@ -98,39 +80,31 @@ public class Collection {
 				parentVersions.set(0,tournament());
 				parentVersions.set(1, tournament());
 				
-				
 				ArrayList<Chromosome>childrenVersions = new ArrayList<>();
 				for (int i = 0; i <2; i ++){
 					childrenVersions.add(i, null);
 				}
+				
 				childrenVersions = parentVersions.get(0).crossover(parentVersions.get(1));
 
 				if (random.nextDouble() <= mutationRatio) {
-					System.out.println("Reached Mutation1");
-					temporaryList.set(elitismPoint++,childrenVersions.get(0).mutation());
+					temporaryList.set(elitismPoint,childrenVersions.get(0).mutation());//TOOK OUT elitismPoint++
 				} else {
-					System.out.println("Reached Mutation Else");
-					temporaryList.set(elitismPoint++, childrenVersions.get(0));
+					temporaryList.set(elitismPoint, childrenVersions.get(0));//TOOK OUT elitismPoint++
 				}
 
 				if (elitismPoint < temporaryList.size()) {
 					if (random.nextDouble() <= mutationRatio) {
-						System.out.println("Reached Mutation1");
 						temporaryList.set(elitismPoint, childrenVersions.get(1).mutation());
 					} else {
-						System.out.println("Reached Mutation1 Else");
 						temporaryList.set(elitismPoint, childrenVersions.get(1));
 					}
 				}
 
-			}
-
-			else {
+			} else {
 				if (random.nextDouble() <= mutationRatio) {
-					System.out.println("Reached Mutation Random");
 					temporaryList.set(elitismPoint, chromePop.get(elitismPoint).mutation());
 				} else {
-					System.out.println("Reached Mutation Random Else");
 					temporaryList.set(elitismPoint, chromePop.get(elitismPoint));
 				}
 			}
@@ -139,12 +113,7 @@ public class Collection {
 		}
 		Collections.sort(temporaryList);
 		Collections.reverse(temporaryList);
-//		for (int i =0; i < temporaryList.size(); i ++) {
-//			System.out.println(temporaryList.get(i).fitness);
-//		}
-		
 		chromePop = temporaryList;
-
 	}
 
 	public Chromosome getFittest() {
@@ -160,11 +129,10 @@ public class Collection {
 		parent = chromePop.get(random.nextInt(chromePop.size()));
 		for (int j = 0; j < tournamentSize; j++) {
 			int point = random.nextInt(chromePop.size());
-			if (chromePop.get(point).compareTo(parent) < 0) {
+			if (chromePop.get(point).compareTo(parent) > 0) {
 				parent = chromePop.get(point);
 			}
 		}
-//		System.out.println("Parent\t" + parent);
 		return parent;
 	}
 

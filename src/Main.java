@@ -16,9 +16,8 @@ public class Main {
 		Collection col = new Collection(read(), numTests);
 		Chromosome alpha = col.getFittest();
 		int i = 0;
-		int j = 0;
 
-		while (alpha.getFitness() != 1 && i < 2) {
+		while (alpha.getFitness() != 1 && i < 20) {
 			System.out.println(alpha.getVersion() + ' ' + i + " Fitness  " + alpha.fitness);
 			col.naturalSelection();
 			alpha = col.getFittest();
