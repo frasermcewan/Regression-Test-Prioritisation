@@ -62,33 +62,33 @@ public class Chromosome implements Comparable<Chromosome> {
 		ArrayList<String> child2 = new ArrayList<>();
 		ArrayList<String> tempList = new ArrayList<>();
 		ArrayList<Chromosome> returnList = new ArrayList<>();
-		
-		System.out.println("Pivot Point = " + pivotPoint);
+//		
+//		System.out.println("Pivot Point = " + pivotPoint);
 		
 		for (int i = 0; i < parent1.size(); i++) {
 			child1.add(i, null);
 			child2.add(i, null);
 			//tempList.add(i, null); //REMOVED DUE TO BELOW DOING add NOT set
-			System.out.println("INIT -- i="+i);
+//			System.out.println("INIT -- i="+i);
 		}
 				
 		for (int i = 0; i < pivotPoint; i++) { //GO UP TO PIVOT NOT <= AS BELOW ITS i=piviotPoint
 			child1.set(i, parent1.get(i));
 			child2.set(i, parent2.get(i));
-			System.out.println("UP TO PIVOT -- i="+i);
+//			System.out.println("UP TO PIVOT -- i="+i);
 		}
 
 		for (int i = 0; i < parent2.size(); i++) {
 			if (!child1.contains(parent2.get(i))) {
 				tempList.add(parent2.get(i)); //ADDING TO A LIST OF NULLS, HENCE WHY THE END WAS ALWAYS NULL
-				System.out.println("CHECK NOT CONTAINS -- i="+i);
+//				System.out.println("CHECK NOT CONTAINS -- i="+i);
 			} else {
-				System.out.println("CHECK CONTAINS -- i="+i);
+//				System.out.println("CHECK CONTAINS -- i="+i);
 			}
 		}
 
 		for (int i = pivotPoint; i < child1.size()  && counter < child1.size() /*- i*/; i++) {//NEEDS TO GO TO THE END OF THE CHILD
-			System.out.println("PIVOT AND BEOND -- i="+i + " - COUNTER=" + counter);
+//			System.out.println("PIVOT AND BEOND -- i="+i + " - COUNTER=" + counter);
 			child1.set(i, tempList.get(counter));
 			counter++;
 		}
@@ -109,9 +109,9 @@ public class Chromosome implements Comparable<Chromosome> {
 
 		tempList.clear();
 		counter = 0;
-
-		System.out.println("child 1 = " + child1);
-		System.out.println("child 2 = " + child2);
+//
+//		System.out.println("child 1 = " + child1);
+//		System.out.println("child 2 = " + child2);
 //		System.out.println("child 1 size = " + child1.size());
 //		System.out.println(numberOfFaults);
 //		System.out.println(mapPop.size());

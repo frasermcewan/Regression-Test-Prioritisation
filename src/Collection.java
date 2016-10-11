@@ -75,25 +75,30 @@ public class Collection {
 			temporaryList.set(i, chromePop.get(i));
 		}
 
+		
+		
 		while (elitismPoint < temporaryList.size()) {
 
-			if (getFittest().fitness <= 5 && increaseMutation == false) {
-				mutationRatio = mutationRatio * 10;
-				increaseMutation = true;
-			}
-
-			if (getFittest().fitness <= 1 && increaseMutation2 == false) {
-				mutationRatio = mutationRatio * 25;
-				increaseMutation2 = true;
-			}
+//			if (getFittest().fitness <= 5 && increaseMutation == false) {
+//				mutationRatio = mutationRatio * 10;
+//				increaseMutation = true;
+//			}
+//
+//			if (getFittest().fitness <= 1 && increaseMutation2 == false) {
+//				mutationRatio = mutationRatio * 25;
+//				increaseMutation2 = true;
+//			}
 
 			if (random.nextDouble() <= selectionRatio) {
+//				System.out.println("Reached Crossover ");
 				ArrayList<Chromosome> parentVersions = new ArrayList<>();
 				for (int i = 0; i <2; i ++){
 					parentVersions.add(i, null);
 				}
 				parentVersions.set(0,tournament());
 				parentVersions.set(1, tournament());
+				
+				
 				ArrayList<Chromosome>childrenVersions = new ArrayList<>();
 				for (int i = 0; i <2; i ++){
 					childrenVersions.add(i, null);
@@ -101,16 +106,19 @@ public class Collection {
 				childrenVersions = parentVersions.get(0).crossover(parentVersions.get(1));
 
 				if (random.nextDouble() <= mutationRatio) {
-
+					System.out.println("Reached Mutation1");
 					temporaryList.set(elitismPoint++,childrenVersions.get(0).mutation());
 				} else {
+					System.out.println("Reached Mutation Else");
 					temporaryList.set(elitismPoint++, childrenVersions.get(0));
 				}
 
 				if (elitismPoint < temporaryList.size()) {
 					if (random.nextDouble() <= mutationRatio) {
+						System.out.println("Reached Mutation1");
 						temporaryList.set(elitismPoint, childrenVersions.get(1).mutation());
 					} else {
+						System.out.println("Reached Mutation1 Else");
 						temporaryList.set(elitismPoint, childrenVersions.get(1));
 					}
 				}
@@ -119,8 +127,10 @@ public class Collection {
 
 			else {
 				if (random.nextDouble() <= mutationRatio) {
+					System.out.println("Reached Mutation Random");
 					temporaryList.set(elitismPoint, chromePop.get(elitismPoint).mutation());
 				} else {
+					System.out.println("Reached Mutation Random Else");
 					temporaryList.set(elitismPoint, chromePop.get(elitismPoint));
 				}
 			}
@@ -128,6 +138,11 @@ public class Collection {
 			++elitismPoint;
 		}
 		Collections.sort(temporaryList);
+		Collections.reverse(temporaryList);
+//		for (int i =0; i < temporaryList.size(); i ++) {
+//			System.out.println(temporaryList.get(i).fitness);
+//		}
+		
 		chromePop = temporaryList;
 
 	}
@@ -149,7 +164,7 @@ public class Collection {
 				parent = chromePop.get(point);
 			}
 		}
-
+//		System.out.println("Parent\t" + parent);
 		return parent;
 	}
 

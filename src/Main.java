@@ -18,15 +18,14 @@ public class Main {
 		int i = 0;
 		int j = 0;
 
-		while (alpha.getFitness() != 1) {
+		while (alpha.getFitness() != 1 && i < 2) {
 			System.out.println(alpha.getVersion() + ' ' + i + " Fitness  " + alpha.fitness);
 			col.naturalSelection();
 			alpha = col.getFittest();
 			i++;
 		}
 
-		System.out.println("Final Version " + i + ": " + alpha.getVersion() + "\n");
-		
+		System.out.println("Final Version " + i + ": " + alpha.getVersion() + "\t" + alpha.fitness.toString() + "\n");
 		
 	}
 
