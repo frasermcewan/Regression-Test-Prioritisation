@@ -51,8 +51,6 @@ public class Collection {
 				temp.add((String) mapPop.keySet().toArray()[randomTest]);
 			}
 			
-		   
-
 			randomValues.add(randomTest);
 		}
 
@@ -128,6 +126,16 @@ public class Collection {
 	
 	public Double Fitness() {
 	 return chromePop.get(0).fitness;
+	}
+	
+	public ArrayList<Double> returnFitnessList () {
+		ArrayList<Double> fitnessList = new ArrayList<>();
+		for (int i =0; i < chromePop.size(); i++) {
+			fitnessList.add(chromePop.get(i).fitness);
+		}
+		
+		return fitnessList;
+		
 	}
 	
 	public Double getFintess(int pos){
