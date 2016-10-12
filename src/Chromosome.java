@@ -25,6 +25,7 @@ public class Chromosome implements Comparable<Chromosome> {
 	
 	public void setFitness() {
 		double additionFunction = 0.0;
+		boolean check = false;
 
 		for (int i = 0; i < numberOfFaults; i++) {// number of faults
 			for (int j = 0; j < testValues.size(); j++) { // number of test
@@ -32,9 +33,16 @@ public class Chromosome implements Comparable<Chromosome> {
 				ArrayList<Integer> temp = mapPop.get(testValues.get(j));
 				if (temp.get(i) == 1) {
 					additionFunction = additionFunction + (i + 1);
+					check = true;
 					break;
 				}
+				//System.out.println(temp);
+				if(!check){
+					additionFunction = additionFunction + numberOfFaults*2;
+				}
 			}
+			check = false;
+			//System.out.println("---");
 		}
 		fitness = (1 - (additionFunction / (numberOfFaults * 5)) + (1 / (2 * numberOfFaults)));
 	}

@@ -11,6 +11,7 @@ import java.util.HashMap;
 public class Main {
 
 	public static int numTests = 0;
+	public static HashMap<String, ArrayList<Integer>> population = new HashMap<>();
 
 	public static void main(String[] args) {
 		Collection col = new Collection(read(), numTests);
@@ -23,14 +24,17 @@ public class Main {
 			alpha = col.getFittest();
 			i++;
 		}
+		System.out.println("\nFinal Version " + i + ": \n" + alpha.getVersion() + "\t" + alpha.fitness.toString() + "\n");
+		//System.out.println("\nFinal Version " + i + ": \n" + population.get(alpha.getCases().get(0)) + "\t" + alpha.fitness.toString() + "\n");
 
-		System.out.println("Final Version " + i + ": " + alpha.getVersion() + "\t" + alpha.fitness.toString() + "\n");
-		
+		for(int j = 0; j < col.getCollection().size(); j++){
+			System.out.println(col.getCollection().get(j).getCases() + " - " + col.getCollection().get(j).fitness);
+		}
 	}
 
 	private static HashMap<String, ArrayList<Integer>> read() {
 		boolean numberOfTests = false;
-		HashMap<String, ArrayList<Integer>> population = new HashMap<>();
+//		HashMap<String, ArrayList<Integer>> population = new HashMap<>();
 		ArrayList<Integer> valuesList = new ArrayList<Integer>();
 		Path path = Paths.get("nanoxmltestfaultmatrix.txt");
 		try (InputStream sizeCalculator = Files.newInputStream(path);

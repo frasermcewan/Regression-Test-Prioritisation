@@ -119,9 +119,17 @@ public class Collection {
 	public Chromosome getFittest() {
 		return chromePop.get(0);
 	}
-
+	
+	public ArrayList<Chromosome> getCollection() {
+		return chromePop;
+	}
+	
 	public Double Fitness() {
 	 return chromePop.get(0).fitness;
+	}
+	
+	public Double getFintess(int pos){
+		return chromePop.get(pos).fitness;
 	}
 
 	public Chromosome tournament() {
