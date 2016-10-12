@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Main {
 
@@ -34,8 +35,10 @@ public class Main {
 
 	private static HashMap<String, ArrayList<Integer>> read() {
 		boolean numberOfTests = false;
-//		HashMap<String, ArrayList<Integer>> population = new HashMap<>();
+		HashMap<String, ArrayList<Integer>> population = new HashMap<>();
+		HashMap<Integer, Integer> versonSort = new HashMap<>();
 		ArrayList<Integer> valuesList = new ArrayList<Integer>();
+		List list = new ArrayList();
 		Path path = Paths.get("nanoxmltestfaultmatrix.txt");
 		try (InputStream sizeCalculator = Files.newInputStream(path);
 				BufferedReader reader = new BufferedReader(new InputStreamReader(sizeCalculator))) {
@@ -45,7 +48,6 @@ public class Main {
 					numTests++;
 
 				} else if (sizeCalc.contains("unitest1") && numberOfTests == false) {
-					numTests = numTests / 2;
 					numberOfTests = true;
 					break;
 				}
@@ -58,9 +60,12 @@ public class Main {
 				BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
 			String line = null;
 			while ((line = reader.readLine()) != null) {
-				if (!(line.contains(":"))) {
+				if (!(line.contains("unitest"))) {
 					line = line.replaceAll("\\s+", "");
-					valuesList.add(Integer.parseInt(line));
+					if (line.contains("v")) {
+						line = Character.toString(line.charAt(1));
+						System.out.println(line);
+					}
 				}
 			}
 		} catch (IOException x) {
