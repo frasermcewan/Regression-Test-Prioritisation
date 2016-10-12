@@ -50,6 +50,8 @@ public class Collection {
 			if (!randomValues.contains(randomTest)) {
 				temp.add((String) mapPop.keySet().toArray()[randomTest]);
 			}
+			
+		   
 
 			randomValues.add(randomTest);
 		}
