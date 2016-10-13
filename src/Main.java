@@ -11,9 +11,6 @@ import java.util.HashMap;
 public class Main {
 
 	public static int numTests = 0;
-	public static int numSeshes = 0;
-
-	//Cameron loves the sesh
 	
 	public static void main(String[] args) {
 		Collection col = new Collection(read(), numTests);
@@ -49,7 +46,6 @@ public class Main {
 					numTests++;
 
 				} else if (sizeCalc.contains("unitest1") && numberOfTests == false) {
-					numTests = numTests / 2;
 					numberOfTests = true;
 					break;
 				}
@@ -62,7 +58,13 @@ public class Main {
 				BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
 			String line = null;
 			while ((line = reader.readLine()) != null) {
-				if (!(line.contains(":"))) {
+				if (!(line.contains("unitest"))) {
+					if (line.contains("v")) {
+											line = Character.toString(line.charAt(1));
+						 					valuesList.add(Integer.parseInt(line));
+						 					}
+					
+					
 					line = line.replaceAll("\\s+", "");
 					valuesList.add(Integer.parseInt(line));
 				}
@@ -74,10 +76,22 @@ public class Main {
 		int i = 0;
 		int counter = 0;
 		while (i < valuesList.size()) {
+			ArrayList<Integer> valueList = new ArrayList<>();
+			
 			ArrayList<Integer> temp = new ArrayList<>();
 			for (int j = i; j < (i + numTests); j++) {
+				
 				temp.add(valuesList.get(j));
+				/**
+				 * Camerons work to be done here, need an ordered collection of the first and second values
+				 */
 			}
+			
+			/**
+			 * Depending of the size of the keyset, for loop to that length and then construct a new arraylist in the correct order
+			 * for i = 0; i < hashSet.size(); i ++
+			 * valueList.add(hashSet.get(i)
+			 */
 			String name = "UNIT-TEST_" + Integer.toString(counter);
 			population.put(name, temp);
 
