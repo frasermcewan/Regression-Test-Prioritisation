@@ -11,7 +11,10 @@ import java.util.HashMap;
 public class Main {
 
 	public static int numTests = 0;
+	public static int numSeshes = 0;
 
+	//Cameron loves the sesh
+	
 	public static void main(String[] args) {
 		Collection col = new Collection(read(), numTests);
 		Chromosome alpha = col.getFittest();
