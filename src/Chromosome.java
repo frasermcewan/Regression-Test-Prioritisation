@@ -38,15 +38,14 @@ public class Chromosome implements Comparable<Chromosome> {
 				}
 				//System.out.println(temp);
 				if(!check){
-					additionFunction = additionFunction + numberOfFaults*2;
+					additionFunction = additionFunction + numberOfFaults*2.5;
 				}
 			}
 			check = false;
 			//System.out.println("---");
 		}
 
-		fitness = (1 - (additionFunction / (numberOfFaults * 5)) + (1 / (2 * numberOfFaults)));
-
+		fitness = 1 - (additionFunction/(testValues.size()*numberOfFaults)) + (1/(2*testValues.size()));;
 	}
 
 	public Chromosome mutation() {
