@@ -13,7 +13,7 @@ public class Chromosome implements Comparable<Chromosome> {
 			HashMap<String, ArrayList<Integer>> mapOfPopulation) {
 		testValues = cases;
 		fitness = fitnessVal;
-		numberOfFaults = numFaults;
+		numberOfFaults = numFaults /2 ;
 		mapPop = mapOfPopulation;
 		setFitness();
 	}
@@ -38,14 +38,14 @@ public class Chromosome implements Comparable<Chromosome> {
 				}
 				//System.out.println(temp);
 				if(!check){
-					additionFunction = additionFunction + numberOfFaults*2.5;
+					additionFunction = additionFunction + numberOfFaults*2;
 				}
 			}
 			check = false;
 			//System.out.println("---");
 		}
 
-		fitness = 1 - (additionFunction/(testValues.size()*numberOfFaults)) + (1/(2*testValues.size()));;
+		fitness = 1 - (additionFunction/((double)testValues.size()*(double)numberOfFaults)) + (1/(2*(double)testValues.size()));;
 	}
 
 	public Chromosome mutation() {

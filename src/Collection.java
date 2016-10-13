@@ -37,6 +37,8 @@ public class Collection {
 		for (int i = 0; i < collectionSize; i++) {
 			chromePop.add(generateChromosome());
 		}
+			//System.out.println(mapPop.values());
+
 	}
 
 	public Chromosome generateChromosome() {

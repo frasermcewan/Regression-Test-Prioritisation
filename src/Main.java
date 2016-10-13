@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class Main {
 
@@ -19,16 +20,16 @@ public class Main {
 
 		while (alpha.getFitness() != 1 && i < 4) {
 			ArrayList<Double> fitnessList = col.returnFitnessList();
-			System.out.println(alpha.getVersion() + ' ' + i + " Fitness  " + alpha.fitness);
-			for(int q = 0; q < fitnessList.size(); q++) {
-				System.out.println("Fitness at\t" + q + "\t is" + fitnessList.get(q));
-			}
+//			System.out.println(alpha.getVersion() + ' ' + i + " Fitness  " + alpha.fitness);
+//			for(int q = 0; q < fitnessList.size(); q++) {
+//				System.out.println("Fitness at\t" + q + "\t is" + fitnessList.get(q));
+//			}
 			col.naturalSelection();
 			alpha = col.getFittest();
 			i++;
 		}
 
-		System.out.println("Final Version " + i + ": " + alpha.getVersion() + "\t" + alpha.fitness.toString() + "\n");
+//		System.out.println("Final Version " + i + ": " + alpha.getVersion() + "\t" + alpha.fitness.toString() + "\n");
 		
 		
 	}
@@ -57,16 +58,18 @@ public class Main {
 		try (InputStream in = Files.newInputStream(path);
 				BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
 			String line = null;
+			String newLine = null;
 			while ((line = reader.readLine()) != null) {
 				if (!(line.contains("unitest"))) {
 					if (line.contains("v")) {
-											line = Character.toString(line.charAt(1));
-						 					valuesList.add(Integer.parseInt(line));
-						 					}
+						newLine = Character.toString(line.charAt(1));
+	 					valuesList.add(Integer.parseInt(newLine)); ////??
+ 					}
 					
-					
+					if (!(line.contains("v"))) {
 					line = line.replaceAll("\\s+", "");
 					valuesList.add(Integer.parseInt(line));
+					}
 				}
 			}
 		} catch (IOException x) {
@@ -75,27 +78,36 @@ public class Main {
 
 		int i = 0;
 		int counter = 0;
+		
 		while (i < valuesList.size()) {
-			ArrayList<Integer> valueList = new ArrayList<>();
-			
 			ArrayList<Integer> temp = new ArrayList<>();
-			for (int j = i; j < (i + numTests); j++) {
-				
+			TreeMap<Integer, Integer> map = new TreeMap<>();
+			for (int j = i; j < (i + (numTests-1)) &&  j <valuesList.size(); j++) {
 				temp.add(valuesList.get(j));
-				/**
-				 * Camerons work to be done here, need an ordered collection of the first and second values
-				 */
 			}
+			
+			for(int k = 0; k < temp.size()-1;k=k+2){
+				map.put(temp.get(k), temp.get(k+1));
+			}
+			
+//		System.out.println(map.keySet());
+			temp.clear();
+			
+			for(int k = 1; k < map.size()+1; k++){
+				temp.add(map.get(k));
+			}
+			
+			System.out.println(temp);
 			
 			/**
 			 * Depending of the size of the keyset, for loop to that length and then construct a new arraylist in the correct order
 			 * for i = 0; i < hashSet.size(); i ++
-			 * valueList.add(hashSet.get(i)
+			 * valueList.add(hashSet.get(i))
 			 */
 			String name = "UNIT-TEST_" + Integer.toString(counter);
 			population.put(name, temp);
 
-			i = i + 9;
+			i = i + (numTests-1);
 			counter++;
 		}
 		// System.out.println(population);
