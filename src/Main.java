@@ -18,9 +18,9 @@ public class Main {
 		Chromosome alpha = col.getFittest();
 		int i = 0;
 
-		while (alpha.getFitness() != 1 && i < 4) {
+		while (alpha.getFitness() != 1 && i < 20) {
 			ArrayList<Double> fitnessList = col.returnFitnessList();
-//			System.out.println(alpha.getVersion() + ' ' + i + " Fitness  " + alpha.fitness);
+			System.out.println(alpha.getVersion() + ' ' + i + " Fitness  " + alpha.fitness);
 //			for(int q = 0; q < fitnessList.size(); q++) {
 //				System.out.println("Fitness at\t" + q + "\t is" + fitnessList.get(q));
 //			}
@@ -29,7 +29,7 @@ public class Main {
 			i++;
 		}
 
-//		System.out.println("Final Version " + i + ": " + alpha.getVersion() + "\t" + alpha.fitness.toString() + "\n");
+		System.out.println("Final Version " + i + ": " + alpha.getVersion() + "\t" + alpha.fitness.toString() + "\n");
 		
 		
 	}
@@ -39,6 +39,7 @@ public class Main {
 		HashMap<String, ArrayList<Integer>> population = new HashMap<>();
 		ArrayList<Integer> valuesList = new ArrayList<Integer>();
 		Path path = Paths.get("nanoxmltestfaultmatrix.txt");
+		//Path path = Paths.get("largedataset.txt");
 		try (InputStream sizeCalculator = Files.newInputStream(path);
 				BufferedReader reader = new BufferedReader(new InputStreamReader(sizeCalculator))) {
 			String sizeCalc = null;
@@ -48,6 +49,7 @@ public class Main {
 
 				} else if (sizeCalc.contains("unitest1") && numberOfTests == false) {
 					numberOfTests = true;
+					System.out.println(numTests);
 					break;
 				}
 			}
@@ -62,8 +64,13 @@ public class Main {
 			while ((line = reader.readLine()) != null) {
 				if (!(line.contains("unitest"))) {
 					if (line.contains("v")) {
+						if(line.length() == 3) {
 						newLine = Character.toString(line.charAt(1));
 	 					valuesList.add(Integer.parseInt(newLine)); ////??
+						} else if (line.length() == 4) {
+							String newLine2 = new StringBuilder().append(line.charAt(1)).append(line.charAt(2)).toString();
+							valuesList.add(Integer.parseInt(newLine2));
+						}
  					}
 					
 					if (!(line.contains("v"))) {
@@ -86,18 +93,22 @@ public class Main {
 				temp.add(valuesList.get(j));
 			}
 			
+		
+			
 			for(int k = 0; k < temp.size()-1;k=k+2){
 				map.put(temp.get(k), temp.get(k+1));
 			}
 			
-//		System.out.println(map.keySet());
+			
+			
+			//System.out.println(map.keySet());
 			temp.clear();
 			
 			for(int k = 1; k < map.size()+1; k++){
 				temp.add(map.get(k));
 			}
 			
-			System.out.println(temp);
+//			System.out.println(temp);
 			
 			/**
 			 * Depending of the size of the keyset, for loop to that length and then construct a new arraylist in the correct order
