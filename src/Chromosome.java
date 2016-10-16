@@ -46,6 +46,12 @@ public class Chromosome implements Comparable<Chromosome> {
 		}
 
 		fitness = 1 - (additionFunction/((double)testValues.size()*(double)numberOfFaults)) + (1/(2*(double)testValues.size()));;
+		System.out.println((double)numberOfFaults);
+//		if(Double.isNaN(fitness)){
+//			System.out.println(additionFunction);
+//			System.out.println(testValues.size());
+//			System.out.println(numberOfFaults);
+//		}
 	}
 
 	public Chromosome mutation() {
@@ -56,8 +62,8 @@ public class Chromosome implements Comparable<Chromosome> {
 		String pointTwoValue = matrix.get(randomPoint2);
 		matrix.set(randomPoint1, pointTwoValue);
 		matrix.set(randomPoint2, pointOneValue);
+		System.out.println("MUTATION" + numberOfFaults);
 		return new Chromosome(matrix, 0.0, numberOfFaults, mapPop);
-
 	}
 
 	public ArrayList<Chromosome> crossover(Chromosome partner2) {
@@ -119,6 +125,8 @@ public class Chromosome implements Comparable<Chromosome> {
 //		System.out.println("child 1 size = " + child1.size());
 //		System.out.println(numberOfFaults);
 //		System.out.println(mapPop.size());
+		
+		System.out.println("CROSSOVER" + numberOfFaults);
 		
 		returnList.add(new Chromosome((child1), 0.0, numberOfFaults, mapPop));
 		returnList.add(new Chromosome((child2), 0.0, numberOfFaults, mapPop));

@@ -20,6 +20,7 @@ public class Collection {
 	public Collection(HashMap<String, ArrayList<Integer>> input, Integer faults) {
 		mapPop = input;
 		numberOfFaults = faults;
+		System.out.println("COLLECTION" + faults);
 		generatePopulation();
 	}
 
