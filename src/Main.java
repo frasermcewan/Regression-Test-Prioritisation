@@ -18,15 +18,15 @@ public class Main {
 		Chromosome alpha = col.getFittest();
 		int i = 0;
 
-		while (alpha.getFitness() != 1 && i < 4 ) {
+		while (alpha.getFitness() != 1 && i < 5 ) {
 //			ArrayList<Double> fitnessList = col.returnFitnessList();
-//			System.out.println(i + "\t" + alpha.getVersion() + ' ' + " Fitness  " + alpha.fitness);
+			System.out.println(i + "\t" + alpha.getVersion() + ' ' + " Fitness  " + alpha.fitness);
 ////			for(int q = 0; q < fitnessList.size(); q++) {
 //				System.out.println("Fitness at\t" + q + "\t is" + fitnessList.get(q));
 //			}
-//			col.naturalSelection();
-//			alpha = col.getFittest();
-//			i++;
+			col.naturalSelection();
+			alpha = col.getFittest();
+			i++;
 		}
 
 		System.out.println("Final Version " + i + ": " + alpha.getVersion() + "\t" + alpha.fitness.toString() + "\n");
@@ -100,7 +100,7 @@ public class Main {
 			
 			
 			
-			System.out.println(map.keySet());
+//			System.out.println(map.keySet());
 			temp.clear();
 			
 			for(int k = 1; k < map.size()+1; k++){
