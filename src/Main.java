@@ -18,15 +18,15 @@ public class Main {
 		Chromosome alpha = col.getFittest();
 		int i = 0;
 
-		while (alpha.getFitness() != 1 && i < 20) {
-			ArrayList<Double> fitnessList = col.returnFitnessList();
-			System.out.println(alpha.getVersion() + ' ' + i + " Fitness  " + alpha.fitness);
-//			for(int q = 0; q < fitnessList.size(); q++) {
+		while (alpha.getFitness() != 1 && i < 4 ) {
+//			ArrayList<Double> fitnessList = col.returnFitnessList();
+//			System.out.println(i + "\t" + alpha.getVersion() + ' ' + " Fitness  " + alpha.fitness);
+////			for(int q = 0; q < fitnessList.size(); q++) {
 //				System.out.println("Fitness at\t" + q + "\t is" + fitnessList.get(q));
 //			}
-			col.naturalSelection();
-			alpha = col.getFittest();
-			i++;
+//			col.naturalSelection();
+//			alpha = col.getFittest();
+//			i++;
 		}
 
 		System.out.println("Final Version " + i + ": " + alpha.getVersion() + "\t" + alpha.fitness.toString() + "\n");
@@ -38,8 +38,8 @@ public class Main {
 		boolean numberOfTests = false;
 		HashMap<String, ArrayList<Integer>> population = new HashMap<>();
 		ArrayList<Integer> valuesList = new ArrayList<Integer>();
-		Path path = Paths.get("nanoxmltestfaultmatrix.txt");
-		//Path path = Paths.get("largedataset.txt");
+		//Path path = Paths.get("nanoxmltestfaultmatrix.txt");
+		Path path = Paths.get("largedataset.txt");
 		try (InputStream sizeCalculator = Files.newInputStream(path);
 				BufferedReader reader = new BufferedReader(new InputStreamReader(sizeCalculator))) {
 			String sizeCalc = null;
@@ -49,7 +49,6 @@ public class Main {
 
 				} else if (sizeCalc.contains("unitest1") && numberOfTests == false) {
 					numberOfTests = true;
-					System.out.println(numTests);
 					break;
 				}
 			}
@@ -101,7 +100,7 @@ public class Main {
 			
 			
 			
-			//System.out.println(map.keySet());
+			System.out.println(map.keySet());
 			temp.clear();
 			
 			for(int k = 1; k < map.size()+1; k++){
