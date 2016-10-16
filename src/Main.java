@@ -14,7 +14,7 @@ public class Main {
 	public static int numTests = 0;
 	
 	public static void main(String[] args) {
-		Collection col = new Collection(read(), numTests);
+		Collection col = new Collection(read(), (numTests/2));
 		Chromosome alpha = col.getFittest();
 		int i = 0;
 

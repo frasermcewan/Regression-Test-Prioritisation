@@ -13,7 +13,7 @@ public class Chromosome implements Comparable<Chromosome> {
 			HashMap<String, ArrayList<Integer>> mapOfPopulation) {
 		testValues = cases;
 		fitness = fitnessVal;
-		numberOfFaults = numFaults /2 ;
+		numberOfFaults = numFaults;
 		mapPop = mapOfPopulation;
 		setFitness();
 	}
