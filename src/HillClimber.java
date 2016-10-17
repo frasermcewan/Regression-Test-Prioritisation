@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class HillClimber {
 
@@ -12,19 +14,21 @@ public class HillClimber {
 	List<List<String>> neighbourStrings = new ArrayList<>();
 	int numberOfFaults = 0;
 	Random random = new Random();
+	ArrayList<Chromosome> path = new ArrayList<>();
+	HashMap<Integer, ArrayList<String>> unique = new HashMap<>();
 
 	public HillClimber(HashMap<String, ArrayList<Integer>> input, Integer faults) {
 		mapPop = input;
 		numberOfFaults = faults;
-
+		generatePopulation();
 	}
 
-	public void generatePopulation() {
-		chromePop.add(generateChromosome());
-		
+	private void generatePopulation() {
+		path.clear();
+		HillClimb(generateChromosome(), true);
 	}
 
-	public Chromosome generateChromosome() {
+	private Chromosome generateChromosome() {
 		ArrayList<String> temp = new ArrayList<>();
 		ArrayList<Integer> randomValues = new ArrayList<>();
 		for (int i = 0; i < 5; i++) {
@@ -43,14 +47,64 @@ public class HillClimber {
 
 	}
 	
-	public void HillClimb() {
-		Chromosome parent;
-		parent = chromePop.get(random.nextInt(chromePop.size()));
-		neighbourStrings = generatePerm(parent.getCases());
-		
-		
+	public void HillClimb(Chromosome chromosome, boolean firstTime) {
+		Chromosome parent = chromosome;
+		ArrayList<String> parentCases = parent.getCases();
+		System.out.println(parent.getCases());
+		neighbourStrings = generatePerm(parentCases);
+		System.out.println(parent.getCases());
+		if(firstTime){
+			for (int i = 0; i < neighbourStrings.size(); i++) {
+				if(neighbourStrings.get(i).size() == 5){
+					unique.put(i,(ArrayList<String>) neighbourStrings.get(i));
+				}
+			}
+			for (int i = 0; i < unique.size(); i++) {
+				Chromosome newChromosome = new Chromosome(unique.get(i), 0.0, numberOfFaults, mapPop);
+				chromePop.add(newChromosome);
+			}
+		}
+		double fitness;
+		double leftNeighbour;
+		double rightNeighbour;
+		for (int i = 0; i < chromePop.size(); i++) {
+			System.out.println(parent.getCases() + " - " + chromePop.get(i).getCases());
+			if(parent.getCases() == chromePop.get(i).getCases()){
+				fitness = chromePop.get(i).fitness;
+				if(i==0){
+					rightNeighbour = chromePop.get(i+1).fitness;
+					leftNeighbour = -1;
+				} else if(i == chromePop.size()-1){
+					leftNeighbour = chromePop.get(i-1).fitness;
+					rightNeighbour = -1;
+				} else {
+					rightNeighbour = chromePop.get(i+1).fitness;
+					leftNeighbour = chromePop.get(i-1).fitness;
+				}
+				if(leftNeighbour < fitness && leftNeighbour > 0 && leftNeighbour < rightNeighbour){
+					//move left
+					path.add(chromePop.get(i-1));
+					printPath();
+					HillClimb(chromePop.get(i-1), false);
+				} else if(rightNeighbour < fitness && rightNeighbour > 0 && rightNeighbour < leftNeighbour){
+					path.add(chromePop.get(i+1));
+					printPath();
+					HillClimb(chromePop.get(i+1), false);
+				} else {
+					System.out.println("New Path");
+					generatePopulation();
+				}
+			}
+		}
 	}
 	
+	private void printPath() {
+		for (int i = 0; i < path.size(); i++) {
+			System.out.println(path.get(i).fitness);
+		}
+		
+	}
+
 	public void neighbours() {
 		
 	}
