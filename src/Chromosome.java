@@ -16,7 +16,8 @@ public class Chromosome implements Comparable<Chromosome> {
 		numberOfFaults = numFaults;
 		mapPop = mapOfPopulation;
 		//setFitness();
-		setFitnessNew();
+		//setFitnessNew();
+		setFitnessNewest();
 	}
 
 	public String getVersion() {
@@ -61,8 +62,11 @@ public class Chromosome implements Comparable<Chromosome> {
 	public void setFitnessNew() {
 		double additionFunction = 0.0;
 		
-		
-		
+		for(int j = 0; j < testValues.size(); j++){
+			ArrayList<Integer> temp = mapPop.get(testValues.get(j));
+			System.out.println(temp);
+		}
+		System.out.println("--------------------");		
 		for(int i = 0; i < numberOfFaults; i++){
 			innerLoop:
 				for(int j = 0; j < testValues.size(); j++){
@@ -73,17 +77,51 @@ public class Chromosome implements Comparable<Chromosome> {
 						additionFunction = additionFunction + j + 1;
 						System.out.println(additionFunction);
 						break innerLoop;
-					} 
+					} else {
+						System.out.println("Not Matched");
+						System.out.println(additionFunction);
+					}
 				}
 		}	
 		double n = testValues.size();
 		double m = numberOfFaults;
 		double mn = m * n;
-		fitness = 1 - ((additionFunction/mn) + (1/(2*n)));
+		fitness = 1 - (additionFunction/mn) + (1/(2*n));
 		//fitness = 1 - (additionFunction/(n*m)) + (1/(2*n));
 	}
 	
-	
+	public void setFitnessNewest() {
+		double additionFunction = 0.0;
+		
+		for(int j = 0; j < testValues.size(); j++){
+			ArrayList<Integer> temp = mapPop.get(testValues.get(j));
+			System.out.println(temp);
+		}
+		System.out.println("--------------------");		
+		
+		for(int i = 0; i < testValues.size(); i++){
+			faultsLoop:
+				for(int j = 0; j < numberOfFaults; j++){
+				ArrayList<Integer> temp = mapPop.get(testValues.get(i));
+				System.out.println(temp + "\t\tPos:" + (j+1));
+				if(temp.get(j) == 1 ){
+					System.out.println("Matched");
+					additionFunction = additionFunction + j + 1;
+					System.out.println(additionFunction);
+					break faultsLoop;
+				} else {
+					System.out.println("Not Matched");
+					System.out.println(additionFunction);
+				}
+			}
+		}
+		
+		double n = testValues.size();
+		double m = numberOfFaults;
+		double mn = m * n;
+		fitness = 1 - (additionFunction/mn) + (1/(2*n));
+		//fitness = 1 - (additionFunction/(n*m)) + (1/(2*n));
+	}
 	
 	
 	

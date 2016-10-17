@@ -19,7 +19,7 @@ public class Main {
 		Chromosome alpha = col.getFittest();
 		int i = 0;
 
-		while (i < 1 ) {
+		while (i < 1) {
 //			ArrayList<Double> fitnessList = col.returnFitnessList();
 			System.out.println("\t\t" + i + "\t" + alpha.getVersion() + "\tFitness\t" + alpha.fitness);
 //			for(int q = 0; q < fitnessList.size(); q++) {
