@@ -32,18 +32,20 @@ public class Chromosome implements Comparable<Chromosome> {
 															// cases
 				ArrayList<Integer> temp = mapPop.get(testValues.get(j));
 				if (temp.get(i) == 1) {
-					additionFunction = additionFunction + (i + 1);
+					additionFunction = additionFunction + (j + 1);
 					check = true;
 					break;
 				}
 				if(!check){
-					additionFunction = additionFunction + numberOfFaults + 1;
+					additionFunction = additionFunction + numberOfFaults+1;
 				}
 			}
 			check = false;
 		}
-
-		fitness = Math.abs(1 - (additionFunction/((double)testValues.size()*(double)numberOfFaults)) + (1/(2*(double)testValues.size())));;
+						
+		double n = testValues.size();
+		double m = numberOfFaults;
+		fitness = Math.abs(1 - (additionFunction/(n*m)) + (1/(2*n)));
 	}
 
 	public Chromosome mutation() {
