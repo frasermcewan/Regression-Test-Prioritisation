@@ -138,6 +138,13 @@ public class Chromosome implements Comparable<Chromosome> {
 		return fitness;
 	}
 
+	
+	public ArrayList<Chromosome> neighbourList() {
+		ArrayList<Chromosome> neighbours = new ArrayList<Chromosome>();
+		
+		return neighbours;
+	}
+	
 	public ArrayList<String> getCases() {
 		return testValues;
 	}
