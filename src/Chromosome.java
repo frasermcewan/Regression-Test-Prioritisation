@@ -15,8 +15,8 @@ public class Chromosome implements Comparable<Chromosome> {
 		fitness = fitnessVal;
 		numberOfFaults = numFaults;
 		mapPop = mapOfPopulation;
-		setFitness();
-		//setFitnessNew();
+		//setFitness();
+		setFitnessNew();
 	}
 
 	public String getVersion() {
@@ -61,15 +61,23 @@ public class Chromosome implements Comparable<Chromosome> {
 	public void setFitnessNew() {
 		double additionFunction = 0.0;
 		
+		
+		
 		for(int i = 0; i < numberOfFaults; i++){
 			innerLoop:
 				for(int j = 0; j < testValues.size(); j++){
 					ArrayList<Integer> temp = mapPop.get(testValues.get(j));
+					System.out.println(temp);
 					if(temp.get(i) == 1 ){
+						System.out.println("Matched");
 						additionFunction = additionFunction + j + 1;
+						System.out.println(additionFunction);
 						break innerLoop;
-					} else {
+					} 
+						else if (temp.get(i) == 0) {
+						System.out.println("Didnt Match");
 						additionFunction = additionFunction + numberOfFaults+1;
+						System.out.println(additionFunction);
 					}
 				}
 		}	

@@ -25,8 +25,8 @@ public class Main {
 //			for(int q = 0; q < fitnessList.size(); q++) {
 //				System.out.println("Fitness at\t" + q + "\t is" + fitnessList.get(q));
 //			}
-//			col.naturalSelection();
-//			alpha = col.getFittest();
+			col.naturalSelection();
+			alpha = col.getFittest();
 			i++;
 		}
 

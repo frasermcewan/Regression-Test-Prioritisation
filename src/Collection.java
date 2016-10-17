@@ -113,7 +113,7 @@ public class Collection {
 			++elitismPoint;
 		}
 		Collections.sort(temporaryList);
-		//Collections.reverse(temporaryList);
+		Collections.reverse(temporaryList);
 		chromePop = temporaryList;
 	}
 
