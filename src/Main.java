@@ -19,12 +19,7 @@ public class Main {
 		Chromosome alpha = col.getFittest();
 		int i = 0;
 		while (i < 100 ) {
-
-//			ArrayList<Double> fitnessList = col.returnFitnessList();
 			System.out.println("\t\t" + i + "\t" + alpha.getVersion() + "\tFitness\t" + alpha.fitness);
-//			for(int q = 0; q < fitnessList.size(); q++) {
-//				System.out.println("Fitness at\t" + q + "\t is" + fitnessList.get(q));
-//			}
 			col.naturalSelection();
 			alpha = col.getFittest();
 			i++;
@@ -32,9 +27,7 @@ public class Main {
 
 		System.out.println("Final Version: \t" + i + "\t" + alpha.getVersion() + "\tFitness\t" + alpha.fitness.toString() + "\n");
 		
-//		for(int q = 0; q < alpha.getCases().size(); q++){
-//			System.out.println(inputFile.get(alpha.getCases().get(q)) + " : " + alpha.getCases().get(q));
-//		}
+
 		
 		/* HILL CLIMBER */
 //		HillClimber climber = new HillClimber(inputFile, (numTests/2));
@@ -106,29 +99,18 @@ public class Main {
 				map.put(temp.get(k), temp.get(k+1));
 			}
 			
-			
-			
-//			System.out.println(map.keySet());
 			temp.clear();
 			
 			for(int k = 1; k < map.size()+1; k++){
 				temp.add(map.get(k));
 			}
-			
-//			System.out.println(temp);
-			
-			/**
-			 * Depending of the size of the keyset, for loop to that length and then construct a new arraylist in the correct order
-			 * for i = 0; i < hashSet.size(); i ++
-			 * valueList.add(hashSet.get(i))
-			 */
 			String name = "UNIT-TEST_" + Integer.toString(counter);
 			population.put(name, temp);
 
 			i = i + (numTests-1);
 			counter++;
 		}
-		// System.out.println(population);
+	
 		return population;
 
 	}

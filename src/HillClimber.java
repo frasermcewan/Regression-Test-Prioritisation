@@ -60,7 +60,7 @@ public class HillClimber {
 			parentCases.add(null);
 		}
 		Collections.copy(parentCases, parent.testValues);
-		neighbourStrings = generatePerm(parentCases);
+		neighbourStrings = generatePermutations(parentCases);
 		
 		if(firstTime){
 			path.add(parent);
@@ -95,11 +95,11 @@ public class HillClimber {
 					leftNeighbour = chromePop.get(i-1).fitness;
 				}
 				System.out.println("LEFT="+leftNeighbour+   "\tFITNESS="+fitness + "\tRIGHT="+rightNeighbour);
-				if(leftNeighbour < fitness && leftNeighbour > 0 && leftNeighbour < rightNeighbour){
+				if(leftNeighbour > fitness && leftNeighbour > rightNeighbour){
 					path.add(chromePop.get(i-1));
 //					printPath();
 					HillClimb(chromePop.get(i-1), false);
-				} else if(rightNeighbour < fitness && rightNeighbour > 0 && rightNeighbour < leftNeighbour){
+				} else if(rightNeighbour > fitness && rightNeighbour > leftNeighbour){
 					path.add(chromePop.get(i+1));
 //					printPath();
 					HillClimb(chromePop.get(i+1), false);
@@ -120,23 +120,23 @@ public class HillClimber {
 		
 	}
 	
-	public List<List<String>> generatePerm(ArrayList<String> original) {
+	public List<List<String>> generatePermutations(ArrayList<String> original) {
 	     if (original.size() == 0) { 
-	       List<List<String>> result = new ArrayList<List<String>>();
-	       result.add(new ArrayList<String>());
-	       return result;
+	       List<List<String>> listOfPermutations = new ArrayList<List<String>>();
+	       listOfPermutations.add(new ArrayList<String>());
+	       return listOfPermutations;
 	     }
 	     String firstElement = original.remove(0);
-	     List<List<String>> returnValue = new ArrayList<List<String>>();
-	     List<List<String>> permutations = generatePerm(original);
-	     for (List<String> smallerPermutated : permutations) {
-	       for (int index=0; index <= smallerPermutated.size(); index++) {
-	         List<String> temp = new ArrayList<String>(smallerPermutated);
-	         temp.add(index, firstElement);
-	         returnValue.add(temp);
+	     List<List<String>> values = new ArrayList<List<String>>();
+	     List<List<String>> fullPermutations = generatePermutations(original);
+	     for (List<String> smallerPermutations : fullPermutations) {
+	       for (int i=0; i <= smallerPermutations.size(); i++) {
+	         List<String> tempList = new ArrayList<String>(smallerPermutations);
+	         tempList.add(i, firstElement);
+	         values.add(tempList);
 	       }
 	     }
-	     return returnValue;
+	     return values;
 	   }
 	
 	
