@@ -31,9 +31,7 @@ public class Chromosome implements Comparable<Chromosome> {
 			for (int j = 0; j < testValues.size(); j++) { 
 				ArrayList<Integer> temp = mapPop.get(testValues.get(j));
 				System.out.println(temp);
-//				for(int q = 0; q < temp.size(); q++) {
-//					System.out.println(temp.get(q));
-//				}
+
 				
 				
 				if (temp.get(i) == 1) {
@@ -49,7 +47,7 @@ public class Chromosome implements Comparable<Chromosome> {
 					
 				}
 			}
-			check = false;
+			check = false; //This means that the condition is always met, but removing it doesn't completely fix the problem
 		}
 						
 		double n = testValues.size();
