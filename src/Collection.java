@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Collection {
-	int tournamentSize = 40;
-	int collectionSize = 1000;
+	int tournamentSize = 5;
+	int collectionSize = 1;
 	double mutationRatio = 0.1;
 	boolean increaseMutation = false;
 	boolean increaseMutation2 = false;
@@ -43,7 +43,7 @@ public class Collection {
 	public Chromosome generateChromosome() {
 		ArrayList<String> temp = new ArrayList<>();
 		ArrayList<Integer> randomValues = new ArrayList<>();
-		for (int i = 0; i < 15; i++) {
+		for (int i = 0; i < 1; i++) {
 			int randomTest = random.nextInt(mapPop.size());
 			if (randomValues.contains(randomTest) == true) {
 				i = i - 1;

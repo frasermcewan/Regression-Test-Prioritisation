@@ -27,17 +27,26 @@ public class Chromosome implements Comparable<Chromosome> {
 		double additionFunction = 0.0;
 		boolean check = false;
 
-		for (int i = 0; i < numberOfFaults; i++) {// number of faults
-			for (int j = 0; j < testValues.size(); j++) { // number of test
-															// cases
+		for (int i = 0; i < numberOfFaults; i++) {
+			for (int j = 0; j < testValues.size(); j++) { 
 				ArrayList<Integer> temp = mapPop.get(testValues.get(j));
+				System.out.println(temp);
+//				for(int q = 0; q < temp.size(); q++) {
+//					System.out.println(temp.get(q));
+//				}
+				
+				
 				if (temp.get(i) == 1) {
+					System.out.println("Matched");
 					additionFunction = additionFunction + (j + 1);
+					System.out.println(additionFunction);
 					check = true;
 					break;
-				}
-				if(!check){
+				} else if(!check){
+					System.out.println("Didnt Match");
 					additionFunction = additionFunction + numberOfFaults+1;
+					System.out.println(additionFunction);
+					
 				}
 			}
 			check = false;
