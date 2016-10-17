@@ -18,7 +18,7 @@ public class Main {
 		Chromosome alpha = col.getFittest();
 		int i = 0;
 
-		while (alpha.getFitness() != 1 && i < 5 ) {
+		while (alpha.getFitness() != 1 && i < 20 ) {
 //			ArrayList<Double> fitnessList = col.returnFitnessList();
 			System.out.println(i + "\t" + alpha.getVersion() + ' ' + " Fitness  " + alpha.fitness);
 ////			for(int q = 0; q < fitnessList.size(); q++) {
