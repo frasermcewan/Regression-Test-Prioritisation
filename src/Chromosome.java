@@ -16,6 +16,7 @@ public class Chromosome implements Comparable<Chromosome> {
 		numberOfFaults = numFaults;
 		mapPop = mapOfPopulation;
 		setFitness();
+		//setFitnessNew();
 	}
 
 	public String getVersion() {
@@ -50,11 +51,43 @@ public class Chromosome implements Comparable<Chromosome> {
 			check = false; //This means that the condition is always met, but removing it doesn't completely fix the problem
 		}
 						
+		
 		double n = testValues.size();
+		System.out.println("Test Values size\t" + n);
 		double m = numberOfFaults;
 		fitness = Math.abs(1 - (additionFunction/(n*m)) + (1/(2*n)));
 	}
 
+	public void setFitnessNew() {
+		double additionFunction = 0.0;
+		
+		for(int i = 0; i < numberOfFaults; i++){
+			innerLoop:
+				for(int j = 0; j < testValues.size(); j++){
+					ArrayList<Integer> temp = mapPop.get(testValues.get(j));
+					if(temp.get(i) == 1 ){
+						additionFunction = additionFunction + j + 1;
+						break innerLoop;
+					} else {
+						additionFunction = additionFunction + numberOfFaults+1;
+					}
+				}
+		}	
+		double n = testValues.size();
+		double m = numberOfFaults;
+		double mn = m * n;
+		fitness = 1 - ((additionFunction/mn) + (1/(2*n)));
+		//fitness = 1 - (additionFunction/(n*m)) + (1/(2*n));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public Chromosome mutation() {
 		ArrayList<String> matrix = getCases();
 		int randomPoint1 = random.nextInt(matrix.size());
