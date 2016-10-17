@@ -27,11 +27,11 @@ public class Main {
 
 		System.out.println("Final Version: \t" + i + "\t" + alpha.getVersion() + "\tFitness\t" + alpha.fitness.toString() + "\n");
 		
-
+		System.out.println("HILL CLIMBER");
 		
 		/* HILL CLIMBER */
-//		HillClimber climber = new HillClimber(inputFile, (numTests/2));
-//		System.out.println("Terminated");
+		HillClimber climber = new HillClimber(inputFile, (numTests/2));
+		System.out.println("Terminated");
 				
 	}
 

@@ -17,7 +17,7 @@ public class HillClimber {
 	Random random = new Random();
 	ArrayList<Chromosome> path = new ArrayList<>();
 	HashMap<Integer, ArrayList<String>> unique = new HashMap<>();
-	int counterDeath = 3;
+	int counterDeath = 5;
 
 	public HillClimber(HashMap<String, ArrayList<Integer>> input, Integer faults) {
 		mapPop = input;
@@ -27,7 +27,7 @@ public class HillClimber {
 
 	private void generatePopulation() {
 		counterDeath--;
-		if(counterDeath > 0){
+		if(counterDeath >= 0){
 			path.clear();
 			
 			HillClimb(generateChromosome(), true);	
@@ -94,12 +94,12 @@ public class HillClimber {
 					rightNeighbour = chromePop.get(i+1).fitness;
 					leftNeighbour = chromePop.get(i-1).fitness;
 				}
-				System.out.println("LEFT="+leftNeighbour+   "\tFITNESS="+fitness + "\tRIGHT="+rightNeighbour);
-				if(leftNeighbour > fitness && leftNeighbour > rightNeighbour){
+				System.out.println("LEFT="+leftNeighbour+ "\tFITNESS="+fitness + "\tRIGHT="+rightNeighbour);
+				if(leftNeighbour > fitness && leftNeighbour >= rightNeighbour){
 					path.add(chromePop.get(i-1));
 //					printPath();
 					HillClimb(chromePop.get(i-1), false);
-				} else if(rightNeighbour > fitness && rightNeighbour > leftNeighbour){
+				} else if(rightNeighbour > fitness && rightNeighbour >= leftNeighbour){
 					path.add(chromePop.get(i+1));
 //					printPath();
 					HillClimb(chromePop.get(i+1), false);
