@@ -4,14 +4,13 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Collection {
-	int tournamentSize = 5;
-	int collectionSize = 100;
-	double mutationRatio = 0.02;
+	int tournamentSize = 40;
+	int collectionSize = 1000;
+	double mutationRatio = 0.1;
 	boolean increaseMutation = false;
 	boolean increaseMutation2 = false;
 	double selectionRatio = 0.85;
 	double elitismRatio = 0.2;
-	String targetString = "Hello, world!";
 	Random random = new Random();
 	ArrayList<Chromosome> chromePop = new ArrayList<>();
 	HashMap<String, ArrayList<Integer>> mapPop = new HashMap<>();
@@ -44,7 +43,7 @@ public class Collection {
 	public Chromosome generateChromosome() {
 		ArrayList<String> temp = new ArrayList<>();
 		ArrayList<Integer> randomValues = new ArrayList<>();
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 15; i++) {
 			int randomTest = random.nextInt(mapPop.size());
 			if (randomValues.contains(randomTest) == true) {
 				i = i - 1;

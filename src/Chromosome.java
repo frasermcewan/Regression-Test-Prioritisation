@@ -37,7 +37,7 @@ public class Chromosome implements Comparable<Chromosome> {
 					break;
 				}
 				if(!check){
-					additionFunction = additionFunction + numberOfFaults*2;
+					additionFunction = additionFunction + numberOfFaults + 1;
 				}
 			}
 			check = false;
@@ -54,7 +54,6 @@ public class Chromosome implements Comparable<Chromosome> {
 		String pointTwoValue = matrix.get(randomPoint2);
 		matrix.set(randomPoint1, pointTwoValue);
 		matrix.set(randomPoint2, pointOneValue);
-//		System.out.println("MUTATION" + numberOfFaults);
 		return new Chromosome(matrix, 0.0, numberOfFaults, mapPop);
 	}
 

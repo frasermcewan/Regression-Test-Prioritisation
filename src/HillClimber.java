@@ -17,7 +17,7 @@ public class HillClimber {
 	Random random = new Random();
 	ArrayList<Chromosome> path = new ArrayList<>();
 	HashMap<Integer, ArrayList<String>> unique = new HashMap<>();
-	int counterDeath = 6;
+	int counterDeath = 3;
 
 	public HillClimber(HashMap<String, ArrayList<Integer>> input, Integer faults) {
 		mapPop = input;
@@ -29,10 +29,9 @@ public class HillClimber {
 		counterDeath--;
 		if(counterDeath > 0){
 			path.clear();
+			
 			HillClimb(generateChromosome(), true);	
-		} else {
-			System.out.println("Terminated");
-		}
+		} 
 	}
 
 	private Chromosome generateChromosome() {
@@ -64,6 +63,8 @@ public class HillClimber {
 		neighbourStrings = generatePerm(parentCases);
 		
 		if(firstTime){
+			path.add(parent);
+			System.out.println("Parent is\t" + parent.fitness);
 			for (int i = 0; i < neighbourStrings.size(); i++) {
 				if(neighbourStrings.get(i).size() == 5){
 					unique.put(i,(ArrayList<String>) neighbourStrings.get(i));
@@ -75,10 +76,11 @@ public class HillClimber {
 			}
 			chromePop.add(random.nextInt(chromePop.size()), parent);
 		}
-		double fitness;
-		double leftNeighbour;
-		double rightNeighbour;
+	
 		for (int i = 0; i < chromePop.size(); i++) {
+			double fitness = 0;
+			double leftNeighbour = 0;
+			double rightNeighbour = 0;
 			//System.out.println(parent.getCases() + " " + chromePop.get(i).getCases() + "\n");
 			if(parent.getCases() == chromePop.get(i).getCases()){
 				fitness = chromePop.get(i).fitness;
@@ -92,17 +94,17 @@ public class HillClimber {
 					rightNeighbour = chromePop.get(i+1).fitness;
 					leftNeighbour = chromePop.get(i-1).fitness;
 				}
-				System.out.println("FITNESS="+fitness + "\tLEFT="+leftNeighbour+"\tRIGHT="+rightNeighbour);
+				System.out.println("LEFT="+leftNeighbour+   "\tFITNESS="+fitness + "\tRIGHT="+rightNeighbour);
 				if(leftNeighbour < fitness && leftNeighbour > 0 && leftNeighbour < rightNeighbour){
 					path.add(chromePop.get(i-1));
-					printPath();
+//					printPath();
 					HillClimb(chromePop.get(i-1), false);
 				} else if(rightNeighbour < fitness && rightNeighbour > 0 && rightNeighbour < leftNeighbour){
 					path.add(chromePop.get(i+1));
-					printPath();
+//					printPath();
 					HillClimb(chromePop.get(i+1), false);
 				} else {
-					System.out.println("New Path");
+					printPath();
 					generatePopulation();
 				}
 			}
@@ -113,10 +115,8 @@ public class HillClimber {
 		for (int i = 0; i < path.size(); i++) {
 			System.out.println(path.get(i).fitness);
 		}
-		
-	}
-
-	public void neighbours() {
+		System.out.println("Stuck!, starting new path!");
+		System.out.println("\n");
 		
 	}
 	
