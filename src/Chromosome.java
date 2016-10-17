@@ -68,17 +68,12 @@ public class Chromosome implements Comparable<Chromosome> {
 				for(int j = 0; j < testValues.size(); j++){
 					ArrayList<Integer> temp = mapPop.get(testValues.get(j));
 					System.out.println(temp);
-					if(temp.get(i) == 1 ){
+					 if(temp.get(i) == 1 ){
 						System.out.println("Matched");
 						additionFunction = additionFunction + j + 1;
 						System.out.println(additionFunction);
 						break innerLoop;
 					} 
-						else if (temp.get(i) == 0) {
-						System.out.println("Didnt Match");
-						additionFunction = additionFunction + numberOfFaults+1;
-						System.out.println(additionFunction);
-					}
 				}
 		}	
 		double n = testValues.size();
