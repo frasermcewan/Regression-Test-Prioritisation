@@ -36,22 +36,14 @@ public class Chromosome implements Comparable<Chromosome> {
 					check = true;
 					break;
 				}
-				//System.out.println(temp);
 				if(!check){
 					additionFunction = additionFunction + numberOfFaults*2;
 				}
 			}
 			check = false;
-			//System.out.println("---");
 		}
 
-		fitness = 1 - (additionFunction/((double)testValues.size()*(double)numberOfFaults)) + (1/(2*(double)testValues.size()));;
-//		System.out.println((double)numberOfFaults);
-//		if(Double.isNaN(fitness)){
-//			System.out.println(additionFunction);
-//			System.out.println(testValues.size());
-//			System.out.println(numberOfFaults);
-//		}
+		fitness = Math.abs(1 - (additionFunction/((double)testValues.size()*(double)numberOfFaults)) + (1/(2*(double)testValues.size())));;
 	}
 
 	public Chromosome mutation() {

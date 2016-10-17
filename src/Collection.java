@@ -20,7 +20,6 @@ public class Collection {
 	public Collection(HashMap<String, ArrayList<Integer>> input, Integer faults) {
 		mapPop = input;
 		numberOfFaults = faults;
-//		System.out.println("COLLECTION" + faults);
 		generatePopulation();
 	}
 
@@ -45,7 +44,7 @@ public class Collection {
 	public Chromosome generateChromosome() {
 		ArrayList<String> temp = new ArrayList<>();
 		ArrayList<Integer> randomValues = new ArrayList<>();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 8; i++) {
 			int randomTest = random.nextInt(mapPop.size());
 			if (randomValues.contains(randomTest) == true) {
 				i = i - 1;
@@ -115,7 +114,7 @@ public class Collection {
 			++elitismPoint;
 		}
 		Collections.sort(temporaryList);
-		Collections.reverse(temporaryList);
+		//Collections.reverse(temporaryList);
 		chromePop = temporaryList;
 	}
 

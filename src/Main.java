@@ -14,14 +14,15 @@ public class Main {
 	public static int numTests = 0;
 	
 	public static void main(String[] args) {
-		Collection col = new Collection(read(), (numTests/2));
+		HashMap<String, ArrayList<Integer>> inputFile = read();
+		Collection col = new Collection(inputFile, (numTests/2));
 		Chromosome alpha = col.getFittest();
 		int i = 0;
 
 		while (alpha.getFitness() != 1 && i < 20 ) {
 //			ArrayList<Double> fitnessList = col.returnFitnessList();
-			System.out.println(i + "\t" + alpha.getVersion() + ' ' + " Fitness  " + alpha.fitness);
-////			for(int q = 0; q < fitnessList.size(); q++) {
+			System.out.println("\t\t" + i + "\t" + alpha.getVersion() + "\tFitness\t" + alpha.fitness);
+//			for(int q = 0; q < fitnessList.size(); q++) {
 //				System.out.println("Fitness at\t" + q + "\t is" + fitnessList.get(q));
 //			}
 			col.naturalSelection();
@@ -29,9 +30,11 @@ public class Main {
 			i++;
 		}
 
-		System.out.println("Final Version " + i + ": " + alpha.getVersion() + "\t" + alpha.fitness.toString() + "\n");
+		System.out.println("Final Version: \t" + i + "\t" + alpha.getVersion() + "\tFitness\t" + alpha.fitness.toString() + "\n");
 		
-		
+//		for(int q = 0; q < alpha.getCases().size(); q++){
+//			System.out.println(inputFile.get(alpha.getCases().get(q)) + " : " + alpha.getCases().get(q));
+//		}
 	}
 
 	private static HashMap<String, ArrayList<Integer>> read() {
