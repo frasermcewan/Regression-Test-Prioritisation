@@ -18,8 +18,8 @@ public class Main {
 		Collection col = new Collection(inputFile, (numTests/2));
 		Chromosome alpha = col.getFittest();
 		int i = 0;
-
 		while (i < 100 ) {
+
 //			ArrayList<Double> fitnessList = col.returnFitnessList();
 			System.out.println("\t\t" + i + "\t" + alpha.getVersion() + "\tFitness\t" + alpha.fitness);
 //			for(int q = 0; q < fitnessList.size(); q++) {

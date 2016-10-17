@@ -15,7 +15,6 @@ public class Chromosome implements Comparable<Chromosome> {
 		fitness = fitnessVal;
 		numberOfFaults = numFaults;
 		mapPop = mapOfPopulation;
-		//setFitness();
 		setFitnessNewest();
 	}
 
@@ -55,44 +54,9 @@ public class Chromosome implements Comparable<Chromosome> {
 		fitness = Math.abs(1 - (additionFunction/(n*m)) + (1/(2*n)));
 	}
 
-	public void setFitnessNew() {
-		double additionFunction = 0.0;
-		for(int i = 0; i < testValues.size(); i++){
-			innerLoop:
-				for(int j = 0; j < numberOfFaults; j++){
-					ArrayList<Integer> temp = mapPop.get(testValues.get(i));
-					System.out.println(temp);
-					 if(temp.get(j) == 1 ){
-							System.out.println("Got 1");
-						System.out.println("Matched");
-						additionFunction = additionFunction + i + 1;
-						System.out.println(additionFunction);
-						break innerLoop;
-					} else {
-						System.out.println("Got 0");
-						additionFunction = additionFunction + numberOfFaults+1;
-					}
-				}
-		}	
-		
-//		System.out.println("additionFunction\t" + additionFunction);
-		double n = testValues.size();
-		double m = numberOfFaults;
-		double mn = m * n;
-		fitness = 1 - ((additionFunction/mn) + (1/(2*n)));
-		//fitness = 1 - (additionFunction/(n*m)) + (1/(2*n));
-	}
-	
-	
+
 	public void setFitnessNewest() {
-		double additionFunction = 0.0;
-		
-//		for(int j = 0; j < testValues.size(); j++){
-//			ArrayList<Integer> temp = mapPop.get(testValues.get(j));
-//			System.out.println(temp);
-//		}
-//		System.out.println("--------------------");		
-		
+		double additionFunction = 0.0;		
 		for(int i = 0; i < testValues.size(); i++){
 			faultsLoop:
 				for(int j = 0; j < numberOfFaults; j++){
@@ -116,11 +80,6 @@ public class Chromosome implements Comparable<Chromosome> {
 		fitness = 1 - (additionFunction/mn) + (1/(2*n));
 		//fitness = 1 - (additionFunction/(n*m)) + (1/(2*n));
 	}
-	
-	
-	
-	
-	
 	
 	public Chromosome mutation() {
 		ArrayList<String> matrix = getCases();
