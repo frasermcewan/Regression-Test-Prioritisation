@@ -15,6 +15,7 @@ public class Collection {
 	ArrayList<Chromosome> chromePop = new ArrayList<>();
 	HashMap<String, ArrayList<Integer>> mapPop = new HashMap<>();
 	int numberOfFaults = 0;
+	int testPerChromosome = 15;
 
 	public Collection(HashMap<String, ArrayList<Integer>> input, Integer faults) {
 		mapPop = input;
@@ -38,11 +39,16 @@ public class Collection {
 		}
 			
 	}
+	
+	public Chromosome generateRandom(){
+		Chromosome random = generateChromosome();
+		return random;
+	}
 
 	public Chromosome generateChromosome() {
 		ArrayList<String> temp = new ArrayList<>();
 		ArrayList<Integer> randomValues = new ArrayList<>();
-		for (int i = 0; i < 15; i++) {
+		for (int i = 0; i < testPerChromosome; i++) {
 			int randomTest = random.nextInt(mapPop.size());
 			if (randomValues.contains(randomTest) == true) {
 				i = i - 1;

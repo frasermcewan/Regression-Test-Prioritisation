@@ -10,7 +10,7 @@ public class Chromosome implements Comparable<Chromosome> {
 	Random random = new Random();
 
 	public Chromosome(ArrayList<String> cases, Double fitnessVal, int numFaults,
-			HashMap<String, ArrayList<Integer>> mapOfPopulation) {
+		HashMap<String, ArrayList<Integer>> mapOfPopulation) {
 		testValues = cases;
 		fitness = fitnessVal;
 		numberOfFaults = numFaults;
@@ -61,15 +61,11 @@ public class Chromosome implements Comparable<Chromosome> {
 			faultsLoop:
 				for(int j = 0; j < numberOfFaults; j++){
 				ArrayList<Integer> temp = mapPop.get(testValues.get(i));
-//				System.out.println(temp + "\t\tPos:" + (j+1));
 				if(temp.get(j) == 1 ){
-//					System.out.println("Matched");
 					additionFunction = additionFunction + j + 1;
-//					System.out.println(additionFunction);
 					break faultsLoop;
 				} else {
-//					System.out.println("Not Matched");
-//					System.out.println(additionFunction);
+
 				}
 			}
 		}
@@ -78,7 +74,6 @@ public class Chromosome implements Comparable<Chromosome> {
 		double m = numberOfFaults;
 		double mn = m * n;
 		fitness = 1 - (additionFunction/mn) + (1/(2*n));
-		//fitness = 1 - (additionFunction/(n*m)) + (1/(2*n));
 	}
 	
 	public Chromosome mutation() {
@@ -119,12 +114,10 @@ public class Chromosome implements Comparable<Chromosome> {
 			if (!child1.contains(parent2.get(i))) {
 				tempList.add(parent2.get(i)); 
 			} else {
-//				System.out.println("CHECK CONTAINS -- i="+i);
 			}
 		}
 
-		for (int i = pivotPoint; i < child1.size()  && counter < child1.size() /*- i*/; i++) {//NEEDS TO GO TO THE END OF THE CHILD
-//			System.out.println("PIVOT AND BEOND -- i="+i + " - COUNTER=" + counter);
+		for (int i = pivotPoint; i < child1.size()  && counter < child1.size(); i++) {
 			child1.set(i, tempList.get(counter));
 			counter++;
 		}
@@ -138,22 +131,14 @@ public class Chromosome implements Comparable<Chromosome> {
 			}
 		}
 
-		for (int j = pivotPoint; j < child2.size() && counter < child2.size()/* - j*/; j++) {
+		for (int j = pivotPoint; j < child2.size() && counter < child2.size(); j++) {
 			child2.set(j, tempList.get(counter));
 			counter++;
 		}
 
 		tempList.clear();
 		counter = 0;
-//
-//		System.out.println("child 1 = " + child1);
-//		System.out.println("child 2 = " + child2);
-//		System.out.println("child 1 size = " + child1.size());
-//		System.out.println(numberOfFaults);
-//		System.out.println(mapPop.size());
-		
-//		System.out.println("CROSSOVER" + numberOfFaults);
-		
+	
 		returnList.add(new Chromosome((child1), 0.0, numberOfFaults, mapPop));
 		returnList.add(new Chromosome((child2), 0.0, numberOfFaults, mapPop));
 		

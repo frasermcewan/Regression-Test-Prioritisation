@@ -17,7 +17,8 @@ public class HillClimber {
 	Random random = new Random();
 	ArrayList<Chromosome> path = new ArrayList<>();
 	HashMap<Integer, ArrayList<String>> unique = new HashMap<>();
-	int counterDeath = 5;
+	int counterDeath = 20;
+	int testPerChromosome = 15;
 
 	public HillClimber(HashMap<String, ArrayList<Integer>> input, Integer faults) {
 		mapPop = input;
@@ -37,7 +38,7 @@ public class HillClimber {
 	private Chromosome generateChromosome() {
 		ArrayList<String> temp = new ArrayList<>();
 		ArrayList<Integer> randomValues = new ArrayList<>();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < testPerChromosome; i++) {
 			int randomTest = random.nextInt(mapPop.size());
 			if (randomValues.contains(randomTest) == true) {
 				i = i - 1;

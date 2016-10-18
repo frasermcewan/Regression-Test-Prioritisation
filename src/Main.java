@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.TreeMap;
 
@@ -32,7 +33,19 @@ public class Main {
 		/* HILL CLIMBER */
 		HillClimber climber = new HillClimber(inputFile, (numTests/2));
 		System.out.println("Terminated");
-				
+		
+		/* RANDOM */
+		System.out.println("Random");
+		ArrayList<Chromosome> storeRandom = new ArrayList<>();
+		for (int j = 0; j < 50; j++) {
+			Chromosome rnd = col.generateRandom();
+			storeRandom.add(rnd);
+		}
+		Collections.sort(storeRandom);
+		for(int j = 0; j < storeRandom.size(); j++){
+			System.out.println("Random Version:" + j + "\t" + storeRandom.get(j).getCases() + "\tFitness\t" + storeRandom.get(j).fitness.toString() + "\n");
+		}
+		
 	}
 
 	private static HashMap<String, ArrayList<Integer>> read() {
