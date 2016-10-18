@@ -8,3 +8,5 @@ free to modify them too.
 As submitted the code will run the GA, Hill Climber and Random, to modify this just comment out the appropriate functions within
 the main class to see each of them run individually.
 
+To change what file is read in, change the path variable in the main class that resides in the read method, it is currently set to run
+on the large dataset
