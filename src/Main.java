@@ -43,7 +43,7 @@ public class Main {
 		}
 		Collections.sort(storeRandom);
 		for(int j = 0; j < storeRandom.size(); j++){
-			System.out.println("Random Version:" + j + "\t" + storeRandom.get(j).getCases() + "\tFitness\t" + storeRandom.get(j).fitness.toString() + "\n");
+			System.out.println("Random Version:" + j + "\t" + storeRandom.get(j).getCases() + "\tFitness\t" + storeRandom.get(j).fitness.toString());
 		}
 		
 	}

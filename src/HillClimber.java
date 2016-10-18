@@ -18,7 +18,7 @@ public class HillClimber {
 	ArrayList<Chromosome> path = new ArrayList<>();
 	HashMap<Integer, ArrayList<String>> unique = new HashMap<>();
 	int counterDeath = 20;
-	int testPerChromosome = 15;
+	int testPerChromosome = 5;
 
 	public HillClimber(HashMap<String, ArrayList<Integer>> input, Integer faults) {
 		mapPop = input;
@@ -67,7 +67,7 @@ public class HillClimber {
 			path.add(parent);
 			System.out.println("Parent is\t" + parent.fitness);
 			for (int i = 0; i < neighbourStrings.size(); i++) {
-				if(neighbourStrings.get(i).size() == 5){
+				if(neighbourStrings.get(i).size() == testPerChromosome){
 					unique.put(i,(ArrayList<String>) neighbourStrings.get(i));
 				}
 			}
@@ -139,8 +139,4 @@ public class HillClimber {
 	     }
 	     return values;
 	   }
-	
-	
-	
-
 }
