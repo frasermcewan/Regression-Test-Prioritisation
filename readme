@@ -1,0 +1,10 @@
+To change the amount of Generations for the GA you have to change the I value in the Main class so that it stops after a certain
+period of time.
+
+To change the values of how many Chromosomes there are and how many testsPerChromosomes the values are located in the Collection
+Class, Just change them to what you deem appropriate. Also the values for mutation/crossover and elitism are located here so feel
+free to modify them too.
+
+As submitted the code will run the GA, Hill Climber and Random, to modify this just comment out the appropriate functions within
+the main class to see each of them run individually.
+

@@ -1,14 +1,14 @@
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
+
 
 public class HillClimber {
 
-	int collectionSize = 20;
+
 	ArrayList<Chromosome> chromePop = new ArrayList<>();
 	HashMap<String, ArrayList<Integer>> mapPop = new HashMap<>();
 	ArrayList<Chromosome> neighbours = new ArrayList<>();
@@ -17,8 +17,7 @@ public class HillClimber {
 	Random random = new Random();
 	ArrayList<Chromosome> path = new ArrayList<>();
 	HashMap<Integer, ArrayList<String>> unique = new HashMap<>();
-	int counterDeath = 20;
-	int testPerChromosome = 15;
+	int counterDeath = 5;
 
 	public HillClimber(HashMap<String, ArrayList<Integer>> input, Integer faults) {
 		mapPop = input;
@@ -28,7 +27,7 @@ public class HillClimber {
 
 	private void generatePopulation() {
 		counterDeath--;
-		if(counterDeath >= 0){
+		if(counterDeath > 0){
 			path.clear();
 			
 			HillClimb(generateChromosome(), true);	
@@ -38,7 +37,7 @@ public class HillClimber {
 	private Chromosome generateChromosome() {
 		ArrayList<String> temp = new ArrayList<>();
 		ArrayList<Integer> randomValues = new ArrayList<>();
-		for (int i = 0; i < testPerChromosome; i++) {
+		for (int i = 0; i < 5; i++) {
 			int randomTest = random.nextInt(mapPop.size());
 			if (randomValues.contains(randomTest) == true) {
 				i = i - 1;
@@ -82,7 +81,6 @@ public class HillClimber {
 			double fitness = 0;
 			double leftNeighbour = 0;
 			double rightNeighbour = 0;
-			//System.out.println(parent.getCases() + " " + chromePop.get(i).getCases() + "\n");
 			if(parent.getCases() == chromePop.get(i).getCases()){
 				fitness = chromePop.get(i).fitness;
 				if(i==0){
@@ -95,7 +93,7 @@ public class HillClimber {
 					rightNeighbour = chromePop.get(i+1).fitness;
 					leftNeighbour = chromePop.get(i-1).fitness;
 				}
-				System.out.println("LEFT="+leftNeighbour+ "\tFITNESS="+fitness + "\tRIGHT="+rightNeighbour);
+				System.out.println("LEFT="+leftNeighbour+   "\tFITNESS="+fitness + "\tRIGHT="+rightNeighbour);
 				if(leftNeighbour > fitness && leftNeighbour >= rightNeighbour){
 					path.add(chromePop.get(i-1));
 //					printPath();
@@ -121,6 +119,15 @@ public class HillClimber {
 		
 	}
 	
+	
+	/**
+	 * Code adapted from http://stackoverflow.com/questions/10305153/generating-all-possible-permutations-of-a-list-recursively
+	 * and modified to fit our needs. Was used to generate permutations of the string values of the chromosome thats created
+	 * for the hill climber.  
+	 * @param original
+	 * @return
+	 */
+	
 	public List<List<String>> generatePermutations(ArrayList<String> original) {
 	     if (original.size() == 0) { 
 	       List<List<String>> listOfPermutations = new ArrayList<List<String>>();
@@ -141,6 +148,6 @@ public class HillClimber {
 	   }
 	
 	
-	
+
 
 }

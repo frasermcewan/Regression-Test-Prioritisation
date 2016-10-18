@@ -29,7 +29,7 @@ public class Main {
 		System.out.println("Final Version: \t" + i + "\t" + alpha.getVersion() + "\tFitness\t" + alpha.fitness.toString() + "\n");
 		
 		System.out.println("HILL CLIMBER");
-		
+//		
 		/* HILL CLIMBER */
 		HillClimber climber = new HillClimber(inputFile, (numTests/2));
 		System.out.println("Terminated");
@@ -52,8 +52,8 @@ public class Main {
 		boolean numberOfTests = false;
 		HashMap<String, ArrayList<Integer>> population = new HashMap<>();
 		ArrayList<Integer> valuesList = new ArrayList<Integer>();
-		Path path = Paths.get("nanoxmltestfaultmatrix.txt");
-		//Path path = Paths.get("largedataset.txt");
+		//Path path = Paths.get("nanoxmltestfaultmatrix.txt");
+		Path path = Paths.get("largedataset.txt");
 		try (InputStream sizeCalculator = Files.newInputStream(path);
 				BufferedReader reader = new BufferedReader(new InputStreamReader(sizeCalculator))) {
 			String sizeCalc = null;
