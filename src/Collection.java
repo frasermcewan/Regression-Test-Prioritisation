@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Collection {
 	int tournamentSize = 5;
-	int collectionSize = 100;
+	int collectionSize = 1000;
 	double mutationRatio = 0.1;
 	boolean increaseMutation = false;
 	boolean increaseMutation2 = false;

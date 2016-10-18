@@ -15,47 +15,14 @@ public class Chromosome implements Comparable<Chromosome> {
 		fitness = fitnessVal;
 		numberOfFaults = numFaults;
 		mapPop = mapOfPopulation;
-		setFitnessNewest();
+		setFitness();
 	}
 
 	public String getVersion() {
 		return String.valueOf(getCases());
 	}
 	
-	
 	public void setFitness() {
-		double additionFunction = 0.0;
-		boolean check = false;
-
-		for (int i = 0; i < numberOfFaults; i++) {
-			breakLoop:
-			for (int j = 0; j < testValues.size(); j++) { 
-				ArrayList<Integer> temp = mapPop.get(testValues.get(j));
-				System.out.println(temp);
-				if (temp.get(i) == 1 && check == false) {
-					System.out.println("Matched");
-					additionFunction = additionFunction + (j + 1);
-					System.out.println(additionFunction);
-					check = true;
-					break breakLoop;
-				} else if(!check){
-					System.out.println("Didnt Match");
-					additionFunction = additionFunction + numberOfFaults+1;
-					System.out.println(additionFunction);
-					
-				}
-			}
-			//check = false; //This means that the condition is always met, but removing it doesn't completely fix the problem
-		}
-				
-		System.out.println(additionFunction);
-		double n = testValues.size();
-		double m = numberOfFaults;
-		fitness = Math.abs(1 - (additionFunction/(n*m)) + (1/(2*n)));
-	}
-
-
-	public void setFitnessNewest() {
 		double additionFunction = 0.0;		
 		for(int i = 0; i < testValues.size(); i++){
 			faultsLoop:

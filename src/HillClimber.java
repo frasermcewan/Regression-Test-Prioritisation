@@ -19,6 +19,8 @@ public class HillClimber {
 	HashMap<Integer, ArrayList<String>> unique = new HashMap<>();
 	int counterDeath = 5;
 
+
+
 	public HillClimber(HashMap<String, ArrayList<Integer>> input, Integer faults) {
 		mapPop = input;
 		numberOfFaults = faults;
@@ -146,8 +148,5 @@ public class HillClimber {
 	     }
 	     return values;
 	   }
-	
-	
-
 
 }
